@@ -1,0 +1,11 @@
+<i id="add" class="foundicon-plus add" ng-click="addItem()"></i>
+<div ng-show="!items.length">
+  <p>No tasks</p>
+</div>
+<div ng-show="items.length">
+  <ol class="list">
+    <li ng-repeat="item in items">
+      {{item.title}} <i class="foundicon-remove remove" ng-click="removeItem(item)"></i>
+    </li>
+  </ol>
+</div>

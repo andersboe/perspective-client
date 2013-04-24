@@ -12,23 +12,18 @@ h1 {
   color: #85a394;
 }
 
-li {
+ol {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.list li {
   position: relative;
   background: #D9D7C5;
   width: 100%;
   margin-bottom: 0.2em;
-  height: 3em;
-}
-
-.progress {
-  position: absolute;
-  background: #99bcaa;
-  top: 0;
-  height: 100%;
-  -webkit-transition: width 1s ease-out;
-  -moz-transition: width 1s ease-out;
-  -o-transition: width 1s ease-out;
-  transition: width 1s ease-out;
+  padding: 0.5em;
 }
 
 .task {
@@ -59,8 +54,20 @@ li {
   color: #99bcaa;
 }
 
-ol {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+.list li:hover .remove {
+  display: block;
 }
+
+.list .remove {
+  position: absolute;
+  top: 50%;
+  margin-top: -0.5em;
+  right: 0.5em;
+  color: #999;
+  display: none;
+}
+
+.list .remove:hover {
+  color: #000;
+}
+
