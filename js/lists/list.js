@@ -1,4 +1,5 @@
 define(['angular', './listData'], function(angular) {
+
   angular.module('list', ['listData']);
 
   return function($scope, ListData) {
@@ -15,7 +16,9 @@ define(['angular', './listData'], function(angular) {
     };
 
     $scope.removeItem = function(item) {
-      items.splice(items.indexOf(item), 1);
+      item.$delete({id: item.id}, function() {
+        items.splice(items.indexOf(item), 1);
+      });
     };
   }
 

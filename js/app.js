@@ -19,14 +19,21 @@ requirejs.config({
 });
 
 require(['angular', 'angularResource', 'jquery', 'lists/list'], function(angular, angularResource, $, ListCtrl) {
+
   angular.module('app', ['listData']).config(function($routeProvider) {
-    $routeProvider.when('/backlog', {controller: ListCtrl, templateUrl: 'js/lists/list.html'}).
-      otherwise({redirectTo: '/backlog'});
+
+    $routeProvider.
+      when('/backlog', { controller: ListCtrl, templateUrl: 'js/lists/list.html' }).
+      otherwise({ redirectTo: '/backlog' });
+
   });
 
   $(document).ready(function() {
+
     var $html = $('html');
     angular.bootstrap($html, ['app']);
     $html.addClass('ng-app');
+
   });
+
 });
