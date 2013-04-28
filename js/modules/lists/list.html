@@ -7,5 +7,6 @@
     <li ng-repeat="item in items">
       {{item.title}} <i class="foundicon-remove remove" ng-click="removeItem(item)"></i>
     </li>
+    <li><input name="newItem.name" ng-model="newItem.name" ng-blur="addItem()" /></li>
   </ol>
 </div>
