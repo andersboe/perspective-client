@@ -1,34 +1,43 @@
 require.config({
-  baseUrl:'js',
+  baseUrl: 'js',
   paths: {
     config: 'config',
-    angular: '../components/AngularJS/angular',
-    angularResource: '../components/angular-resource/angular-resource',
-    jquery: '../components/jquery/jquery'
+    jquery: '../libraries/jquery/jquery',
+    underscore: '../libraries/underscore/underscore',
+    backbone: '../libraries/backbone/backbone',
+    backboneStickit: '../libraries/backbone.stickit/backbone.stickit',
+
+    text: '../libraries/text/text',
+    handlebars: '../libraries/hb/customHandlebars',
+    hb: '../libraries/hb/hb'
   },
   shim: {
-    'angular': {
-      exports: 'angular'
+    underscore: {
+      exports: '_'
     },
-    'angularResource': {
-      deps: ['angular']
+    backbone: {
+      deps: ['underscore', 'jquery'],
+      exports: 'Backbone'
+    },
+    backboneStickit: {
+      deps: ['backbone']
     }
   },
-  priority:[
-    'angular'
-  ]
+  hb: {
+    templateExtension: '.html'
+  }
 });
 
-require([
-  'angular',
-  'jquery',
-  'app',
-  'directives/ngBlur',
-  'routes'
-], function(angular, $) {
+require(
+['modules/app/app', 'jquery', 'backbone'],
+function(App, $, Backbone) {
+
+  var app = new App({ el: $("body") });
 
   $(document).ready(function() {
-    angular.bootstrap(document, ['app']);
+    app.run(function() {
+      Backbone.history.start();
+    });
   });
 
 });
