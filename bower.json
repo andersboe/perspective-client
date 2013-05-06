@@ -4,7 +4,7 @@
   "ignore": [
     "**/.*",
     "node_modules",
-    "libraries"
+    "src/libraries"
   ],
   "dependencies": {
     "backbone": "~1.0.0",
@@ -12,6 +12,9 @@
     "backbone.stickit": "~0.6.3",
     "jquery": "~2.0.0",
     "requirejs": "~2.1.5",
-    "hb": "git@github.com:hinderberg/requirejs-handlebars-plugin.git"
+    "almond": "~0.2.5",
+    "hb": "git@github.com:hinderberg/requirejs-handlebars-plugin.git",
+    "sinon": "master",
+    "jasmine-sinon": "master"
   }
 }
