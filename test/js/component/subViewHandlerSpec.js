@@ -1,4 +1,7 @@
-define(['component/subViewHandler', 'sinon'], function(SubViewHandler, sinon) {
+define(function(require) {
+
+    var SubViewHandler = require('components/subViewHandler');
+    var sinon = require('sinon');
 
     describe('subview handler', function() {
 

@@ -1,4 +1,11 @@
-define(['component/section', 'base/view', 'jquery', 'sinon'], function(Section, View, $, sinon) {
+define(function(require) {
+
+    var $ = require('jquery');
+
+    var View = require('base/view'),
+      Section = require('components/section');
+
+    var sinon = require('sinon');
 
     describe("Section", function() {
         describe("show a view", function() {

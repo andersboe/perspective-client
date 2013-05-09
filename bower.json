@@ -13,8 +13,13 @@
     "jquery": "~2.0.0",
     "requirejs": "~2.1.5",
     "almond": "~0.2.5",
-    "hb": "git@github.com:hinderberg/requirejs-handlebars-plugin.git",
-    "sinon": "master",
-    "jasmine-sinon": "master"
+    "hb": "git@github.com:hinderberg/requirejs-handlebars-plugin.git"
+  },
+  "devDependencies": {
+    "chai": "latest",
+    "chai-backbone": "latest",
+    "sinon-chai":"latest",
+    "sinon": "http://sinonjs.org/releases/sinon-1.6.0.js",
+    "jasmine-sinon": "latest"
   }
 }

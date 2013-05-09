@@ -1,4 +1,7 @@
-define(['component/eventBus', 'sinon'], function(eventBus, sinon) {
+define(function(require) {
+
+    var eventBus = require('components/eventBus'),
+    sinon = require('sinon');
 
     describe("EventBus", function() {
 
@@ -27,7 +30,7 @@ define(['component/eventBus', 'sinon'], function(eventBus, sinon) {
             eventBus.on("test1", spy1);
             eventBus.on("test2", spy2);
 
-            eventBus.reset();
+            eventBus.off();
             eventBus.trigger("test1");
             eventBus.trigger("test2");
 

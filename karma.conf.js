@@ -1,4 +1,6 @@
 // base path, that will be used to resolve files and exclude
+process.env['PHANTOMJS_BIN'] = 'node_modules/.bin/phantomjs';
+
 basePath = '';
 
 frameworks = ['jasmine', 'requirejs'];
@@ -6,7 +8,7 @@ frameworks = ['jasmine', 'requirejs'];
 // list of files / patterns to load in the browser
 files = [
   { pattern: 'test/js/**/*.js', included: false },
-  { pattern: 'src/js/**/*.js', included: false },
+  { pattern: 'src/**/*.js', included: false },
   { pattern: 'src/js/**/*.html', included: false },
   'test/test-main.js'
 ];
@@ -17,18 +19,7 @@ exclude = [];
 // use dolts reporter, as travis terminal does not support escaping sequences
 // possible values: 'dots', 'progress', 'junit', 'teamcity'
 // CLI --reporters progress
-reporters = ['progress', 'coverage'];
-
-coverageReporter = {
-  type: 'html',
-  dir: 'target/coverage/'
-};
-
-
-junitReporter = {
-  // will be resolved to basePath (in the same way as files/exclude patterns)
-  outputFile: 'test-results.xml'
-};
+reporters = ['progress'];
 
 // web server port
 // CLI --port 9876
@@ -45,11 +36,11 @@ colors = true;
 // level of logging
 // possible values: karma.LOG_DISABLE || karma.LOG_ERROR || karma.LOG_WARN || karma.LOG_INFO || karma.LOG_DEBUG
 // CLI --log-level debug
-logLevel = "LOG_INFO";
+logLevel = LOG_ERROR;
 
 // enable / disable watching file and executing tests whenever any file changes
 // CLI --auto-watch --no-auto-watch
-autoWatch = true;
+autoWatch = false;
 
 // Start these browsers, currently available:
 // - Chrome
@@ -74,13 +65,9 @@ singleRun = false;
 // CLI --report-slower-than 500
 reportSlowerThan = 500;
 
-// compile coffee scripts
-preprocessors = {
-  'src/js/**/*.js': 'coverage'
-};
-
 plugins = [
   'karma-jasmine',
   'karma-chrome-launcher',
+  'karma-phantomjs-launcher',
   "karma-requirejs"
 ];

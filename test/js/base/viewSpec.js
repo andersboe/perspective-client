@@ -1,135 +1,129 @@
-define(['base/view', 'sinon', 'component/eventBus', 'jquery'], function(View, sinon, events, $) {
+define(function(require) {
 
-    describe('View', function() {
+  var $ = require('jquery'),
+  View = require('base/view'),
+  events = require('components/eventBus');
 
-        describe('render template', function() {
+  var sinon = require('sinon');
 
-            var testView, template;
+  describe('View', function() {
 
-            beforeEach(function() {
-                template = sinon.mock();
+    describe('#renderTemplate', function() {
 
-                var TestView = View.extend({
-                    template: template
-                });
+      var testView, template;
 
-                testView = new TestView();
-            });
+      beforeEach(function() {
+        template = sinon.mock();
 
-            it('accepts a template specified as a function', function() {
-                template.returns('<h1>TestView</h1>');
-
-                testView.renderTemplate();
-
-                expect(testView.$('h1').text()).toEqual('TestView');
-            });
-
-            it('passes input to the template function', function() {
-                var data = { key: "value" };
-
-                testView.renderTemplate(data);
-
-                expect(testView.template).toHaveBeenCalledWith(data);
-            });
-
-            it('combines several input arguments', function() {
-                testView.renderTemplate({ key: "value" }, { key2: "value2" });
-
-                var call = testView.template.firstCall;
-
-                var args = call.args;
-
-                expect(args.length).toEqual(1);
-                expect(args[0].key).toEqual("value");
-                expect(args[0].key2).toEqual("value2");
-            });
-
+        var TestView = View.extend({
+          template: template
         });
 
-        describe('destroy', function() {
+        testView = new TestView();
+      });
 
-            it('unbinds all events bound by the view', function() {
-                var spy = sinon.spy();
+      it('accepts a template specified as a function', function() {
+        template.returns('<h1>TestView</h1>');
 
-                var view = new View();
-                view.bindTo(events, "test", spy);
-                view.destroy();
+        testView.renderTemplate();
 
-                events.trigger("test");
+        expect(testView.$('h1').text()).toEqual('TestView');
+      });
 
-                expect(spy).not.toHaveBeenCalled();
-            });
+      it('passes input to the template function', function() {
+        var data = { key: "value" };
 
-            it('unbinds the events bound directly on the view', function() {
-                var spy = sinon.spy();
+        testView.renderTemplate(data);
 
-                var view = new View();
-                view.on("test", spy);
-                view.destroy();
+        expect(testView.template).toHaveBeenCalledWith(data);
+      });
 
-                view.trigger("test");
+      it('combines several input arguments', function() {
+        testView.renderTemplate({ key: "value" }, { key2: "value2" });
 
-                expect(spy).not.toHaveBeenCalled();
-            });
+        var call = testView.template.firstCall;
 
-            it('unbinds events bound on subviews', function() {
-                var spy = sinon.spy();
+        var args = call.args;
 
-                var TestView = View.extend({
-                    initialize: function() {
-                        this.bindTo(events, "test", spy);
-                    }
-                });
-
-                var view = new View();
-                var testView = new TestView();
-
-                view.addSubView(testView);
-                view.destroy();
-
-                events.trigger("test");
-
-                expect(spy).not.toHaveBeenCalled();
-            });
-
-            it('unbinds delegated events', function() {
-                var spy = sinon.spy();
-
-                var TestView = View.extend({
-                    events: {
-                        'click': spy
-                    }
-                });
-
-                var testView = new TestView();
-                testView.destroy();
-
-                testView.$el.click();
-
-                expect(spy).not.toHaveBeenCalled();
-            });
-
-            it('removes the view from the DOM', function() {
-                var DOM = $('<div></div>');
-
-                var TestView = View.extend({
-                    className: 'someClass',
-                    tagName: 'h1'
-                });
-
-                var testView = new TestView();
-
-                DOM.append(testView.el);
-
-                expect(DOM.html()).toEqual('<h1 class="someClass"></h1>');
-
-                testView.destroy();
-
-                expect(DOM.html()).toEqual('');
-            });
-
-        });
+        expect(args.length).toEqual(1);
+        expect(args[0].key).toEqual("value");
+        expect(args[0].key2).toEqual("value2");
+      });
 
     });
+
+    describe('destroy', function() {
+
+      it('unbinds all events bound by the view', function() {
+        var spy = sinon.spy();
+
+        var view = new View();
+        view.listenTo(events, "test", spy);
+        view.destroy();
+
+        events.trigger("test");
+
+        expect(spy).not.toHaveBeenCalled();
+      });
+
+      it('unbinds events bound on subviews', function() {
+        var spy = sinon.spy();
+
+        var TestView = View.extend({
+          initialize: function() {
+            this.listenTo(events, "test", spy);
+          }
+        });
+
+        var view = new View();
+        var testView = new TestView();
+
+        view.addSubView(testView);
+        view.destroy();
+
+        events.trigger("test");
+
+        expect(spy).not.toHaveBeenCalled();
+      });
+
+      it('unbinds delegated events', function() {
+        var spy = sinon.spy();
+
+        var TestView = View.extend({
+          events: {
+            'click': spy
+          }
+        });
+
+        var testView = new TestView();
+        testView.destroy();
+
+        testView.$el.click();
+
+        expect(spy).not.toHaveBeenCalled();
+      });
+
+      it('removes the view from the DOM', function() {
+        var DOM = $('<div></div>');
+
+        var TestView = View.extend({
+          className: 'someClass',
+          tagName: 'h1'
+        });
+
+        var testView = new TestView();
+
+        DOM.append(testView.el);
+
+        expect(DOM.html()).toEqual('<h1 class="someClass"></h1>');
+
+        testView.destroy();
+
+        expect(DOM.html()).toEqual('');
+      });
+
+    });
+
+  });
 
 });

@@ -1,4 +1,7 @@
-define(['component/sync', 'backbone'], function(sync, Backbone) {
+define(function(require) {
+
+    var Backbone = require('backbone'),
+      sync = require('components/ajaxSync')({baseUrl: "/rest"});
 
     describe('sync', function() {
 

@@ -2,10 +2,8 @@ var tests = Object.keys(window.__karma__.files).filter(function (file) {
   return /Spec\.js$/.test(file);
 });
 
-var preIncluded = ['sinon', 'jasmine-sinon'];
-
+var preIncluded = ['chai', 'sinon', 'sinon-chai', 'jasmine-sinon'];
 var deps = preIncluded.concat(tests);
-
 
 requirejs.config({
   urlArgs: 'v=' + Math.random(),
@@ -22,9 +20,11 @@ requirejs.config({
     handlebars: '../libraries/hb/customHandlebars',
     hb: '../libraries/hb/hb',
 
-    'sinon': '../libraries/sinon/lib/sinon',
-    'jasmine-sinon': '../libraries/jasmine-sinon/lib/jasmine-sinon'
 
+    'chai': '../libraries/chai/chai',
+    'sinon': '../libraries/sinon/index',
+    'jasmine-sinon': '../libraries/jasmine-sinon/lib/jasmine-sinon',
+    'sinon-chai': "../libraries/sinon-chai/lib/sinon-chai"
   },
   shim: {
     underscore: {
@@ -37,9 +37,11 @@ requirejs.config({
     backboneStickit: {
       deps: ['backbone']
     },
+
     'sinon': {
       exports: 'sinon'
     },
+
     'jasmine-sinon': ['sinon']
   },
   hb: {
@@ -49,3 +51,4 @@ requirejs.config({
   deps: deps,
   callback: window.__karma__.start
 });
+

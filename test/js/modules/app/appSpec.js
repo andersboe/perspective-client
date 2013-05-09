@@ -1,4 +1,7 @@
-define(['modules/app/app', 'component/section'], function(App, Section) {
+define(function(require) {
+
+    var App = require('modules/app/app');
+    var Section = require('components/section');
 
     describe('app', function() {
 
