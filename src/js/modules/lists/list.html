@@ -1,12 +1,12 @@
-<i id="add" class="foundicon-plus add" ng-click="addItem()"></i>
-<div ng-show="!items.length">
+<i id="add" class="foundicon-plus add"></i>
+
+{{#unless items}}
+<div>
   <p>No tasks</p>
 </div>
-<div ng-show="items.length">
+{{else}}
+<div>
   <ol class="list">
-    <li ng-repeat="item in items">
-      {{item.title}} <i class="foundicon-remove remove" ng-click="removeItem(item)"></i>
-    </li>
-    <li><input name="newItem.name" ng-model="newItem.name" ng-blur="addItem()" /></li>
   </ol>
 </div>
+{{/unless}}

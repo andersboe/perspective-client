@@ -28,8 +28,7 @@ require.config({
   }
 });
 
-require(
-['modules/app/app', 'jquery', 'backbone'],
+require(['modules/app/app', 'jquery', 'backbone', 'backboneStickit'],
 function(App, $, Backbone) {
 
   var app = new App({ el: $("body") });
