@@ -1,7 +1,7 @@
 define(function(require) {
 
-  var App = require('modules/app/app');
-  var Section = require('components/section');
+  var App = require('modules/app/app'),
+    Section = require('components/section');
 
   describe('app', function() {
 

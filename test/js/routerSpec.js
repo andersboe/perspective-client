@@ -1,11 +1,11 @@
-define([
-    'router'
-], function(Router) {
+define(function(require) {
 
-    describe('Router', function() {
-      it("its true", function() {
-        expect(true === true);
-      })
-    });
+  var router = require('router');
+
+  describe('Router', function() {
+    it("its true", function() {
+      expect(true === true);
+    })
+  });
 
 });

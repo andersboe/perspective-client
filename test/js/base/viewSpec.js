@@ -1,10 +1,9 @@
 define(function(require) {
 
   var $ = require('jquery'),
-  View = require('base/view'),
-  events = require('components/eventBus');
-
-  var sinon = require('sinon');
+    View = require('base/view'),
+    events = require('components/eventBus'),
+    sinon = require('sinon');
 
   describe('View', function() {
 
