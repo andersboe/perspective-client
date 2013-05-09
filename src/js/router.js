@@ -1,6 +1,9 @@
 define(function(require) {
 
-  var BaseRouter = require("base/router");
+  var BaseRouter = require('base/router'),
+    ListView = require('modules/lists/listView'),
+    List = require('modules/lists/list'),
+    Item = require('modules/lists/item');
 
   var Router = BaseRouter.extend({
 
@@ -13,7 +16,13 @@ define(function(require) {
     },
 
     list: function() {
+      var list = new List([
+        new Item({title: "Baah"}),
+        new Item({title: "Baah"})
+      ]);
+      var listView = new ListView({list: list});
 
+      this.sections.main.show(listView).render();
     }
   });
 

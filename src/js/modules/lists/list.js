@@ -1,27 +1,9 @@
 define(function(require) {
+  var Collection = require('base/collection');
 
-  var View = require('base/view'),
-    listTemplate = require('./list');
-
-  var List = View.extend({
-
-    template: listTemplate,
-
-    initialize: function(options) {
-      this.list = options.list;
-    },
-
-    bindings: {
-      '#title': 'title',
-    },
-
-    render: function() {
-      this.renderTemplate();
-      this.stickit(this.otherModel);
-    }
+  var List = Collection.extend({
 
   });
 
   return List;
-
 });
