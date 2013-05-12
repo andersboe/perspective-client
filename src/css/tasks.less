@@ -2,62 +2,57 @@ ol.list {
   list-style-type: none;
   margin: 0;
   padding: 0;
-}
 
-.list li {
-  position: relative;
-  background: #D9D7C5;
-  width: 100%;
-  margin-bottom: 0.2em;
-  padding: 0.5em;
-}
+  li {
+    position: relative;
+    background: #D9D7C5;
+    border: 1px solid #D9D7C5;
+    width: 100%;
+    margin-bottom: 0.2em;
+    padding: 0.5em;
+    min-height: 2.5em;
+  }
 
-.task {
-  padding: 0.7em 1em;
-  position: absolute;
-  z-index: 2;
-  top: 0;
-}
+  .size {
+    position: absolute;
+    right: 0.5em;
+    top: 0.7em;
+    border: 1px solid #736766;
+    border-radius: 3px;
+    padding: 0.2em 0.5em;
+  }
 
-.size {
-  position: absolute;
-  right: 0.5em;
-  top: 0.7em;
-  border: 1px solid #736766;
-  border-radius: 3px;
-  padding: 0.2em 0.5em;
-}
+  .add {
+    position: absolute;
+    top: 1.3em;
+    right: 0.7em;
+    font-size: 1.5em;
+    color: #D9D7C5;
+  }
 
-.add {
-  position: absolute;
-  top: 1.3em;
-  right: 0.7em;
-  font-size: 1.5em;
-  color: #D9D7C5;
-}
+  .add:hover {
+    color: #99bcaa;
+  }
 
-.add:hover {
-  color: #99bcaa;
-}
+  li:hover .remove {
+    display: block;
+  }
 
-.list li:hover .remove {
-  display: block;
-}
+  .remove {
+    position: absolute;
+    top: 50%;
+    margin-top: -0.5em;
+    right: 0.5em;
+    color: #999;
+    display: none;
+  }
 
-.list .remove {
-  position: absolute;
-  top: 50%;
-  margin-top: -0.5em;
-  right: 0.5em;
-  color: #999;
-  display: none;
-}
+  .remove:hover {
+    color: #000;
+  }
 
-.list .remove:hover {
-  color: #000;
-}
-
-.sortable-placeholder {
-  border: 1px dashed #CCC;
-  background: none;
+  .sortable-placeholder {
+    border: 1px dashed #CCC;
+    background: none;
+  }
 }
