@@ -17,8 +17,11 @@ define(function(require) {
 
     list: function() {
       var list = new List([
-        new Item({title: "Baah"}),
-        new Item({title: "Baah"})
+        new Item({title: "Task 1", id: 1, priority: 1}),
+        new Item({title: "Task 3", id: 3, priority: 3}),
+        new Item({title: "Task 4", id: 4, priority: 4}),
+        new Item({title: "Task 2", id: 2, priority: 2}),
+        new Item({title: "Task 5", id: 5, priority: 5})
       ]);
       var listView = new ListView({list: list});
 

@@ -9,7 +9,8 @@ require.config({
 
     text: '../libraries/text/text',
     handlebars: '../libraries/hb/customHandlebars',
-    hb: '../libraries/hb/hb'
+    hb: '../libraries/hb/hb',
+    jQuerySortable: '../libraries/html5sortable/index'
   },
   shim: {
     underscore: {
@@ -21,6 +22,9 @@ require.config({
     },
     backboneStickit: {
       deps: ['backbone']
+    },
+    jQuerySortable: {
+      deps: ['jquery']
     }
   },
   hb: {

@@ -9,17 +9,22 @@ define(function(require) {
 
     template: listItemTemplate,
 
-    initialize: function(options) {
-      this.item = options.item;
+    events: {
+      'dragend': 'dragend'
     },
 
     bindings: {
       '.title': 'title'
     },
 
+    dragend: function() {
+      this.trigger('priorityChanged', this.model);
+    },
+
     render: function() {
       this.renderTemplate();
-      this.stickit(this.item);
+      this.stickit(this.model);
+      this.$el.attr('data-id', this.model.get('id'));
       return this;
     }
 

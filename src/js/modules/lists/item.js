@@ -5,7 +5,8 @@ define(function(require) {
   var Item = Model.extend({
     defaults: {
       title: undefined
-    }
+    },
+    urlRoot: '/tasks'
   });
 
   return Item;
