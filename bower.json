@@ -20,6 +20,7 @@
     "chai-backbone": "latest",
     "sinon-chai":"latest",
     "sinon": "http://sinonjs.org/releases/sinon-1.6.0.js",
-    "jasmine-sinon": "latest"
+    "jasmine-sinon": "latest",
+    "less.js": "latest"
   }
 }
