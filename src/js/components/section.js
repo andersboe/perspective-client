@@ -12,7 +12,8 @@ define(function(require) {
       this.close();
       this.ensureEl();
       this.open(view);
-      return this.currentView === view;
+      this.currentView = view;
+      return this.currentView;
     },
 
     ensureEl: function() {
