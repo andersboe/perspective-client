@@ -17,7 +17,7 @@ define(function(require) {
       options.url = baseUrl + url;
 
       Backbone.sync.apply(this, arguments);
-    }
+    };
 
   };
 

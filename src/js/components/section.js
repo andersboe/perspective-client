@@ -12,7 +12,7 @@ define(function(require) {
       this.close();
       this.ensureEl();
       this.open(view);
-      return this.currentView = view;
+      return this.currentView === view;
     },
 
     ensureEl: function() {
