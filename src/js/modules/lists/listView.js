@@ -51,7 +51,7 @@ define(function(require) {
           previousId: previousId,
           nextId: nextId
         },
-        {patch: true}
+        { patch: true }
       );
 
     }
