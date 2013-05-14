@@ -30,17 +30,17 @@ define(function(require) {
 
     updateSort: function(item) {
       var newSortOrder = [],
-          newItemIndex = -1;
+          newIndexForItem = -1;
 
       this.$('.list > li').each(function(index) {
         var id = $(this).data('id');
         if(id === item.get('id')) {
-          newItemIndex = index;
+          newIndexForItem = index;
         }
         newSortOrder.push(id);
       });
 
-      this.list.updateSortOrderForItem(item, newSortOrder, newItemIndex);
+      this.list.updatePriorityForItem(item, newSortOrder, newIndexForItem);
 
     }
 

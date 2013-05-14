@@ -4,7 +4,7 @@ define(function(require) {
   var List = Collection.extend({
     comparator: 'priority',
 
-    updateSortOrderForItem: function(item ,newSortOrder, newItemIndex) {
+    updatePriorityForItem: function(item, newSortOrder, newIndexForItem) {
       var isFirstItem = newItemIndex === 0;
       var isLastItem = newItemIndex === newSortOrder.length - 1;
       var previousId = isFirstItem ? null : this.get(newSortOrder[newItemIndex - 1]).get('id');
