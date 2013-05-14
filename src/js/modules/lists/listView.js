@@ -2,8 +2,9 @@ define(function(require) {
 
   var View = require('base/view'),
     listTemplate = require('hb!./list'),
-    ListItemView = require('./listItemView'),
-    jQuerySortable = require('jQuerySortable');
+    ListItemView = require('./listItemView');
+
+    require('jQuerySortable');
 
   var List = View.extend({
 
@@ -16,43 +17,30 @@ define(function(require) {
     render: function() {
       this.renderTemplate();
 
-      var fragment = document.createDocumentFragment();
-      var list = this;
-      this.list.each(function(item) {
+      var items = this.list.map(function(item) {
         var listItem = new ListItemView({model:item});
-        listItem.on("priorityChanged", list.updateSort, list);
-        fragment.appendChild(listItem.render().el);
-      });
+        listItem.on("priorityChanged", this.updateSort, this);
+        return listItem.render().el;
+      }, this);
 
-      this.$('.list').html(fragment).sortable();
+      this.$('.list').html(items).sortable();
 
       return this;
     },
 
     updateSort: function(item) {
-      var updatedList = [],
-          itemIndex = -1;
+      var newSortOrder = [],
+          newItemIndex = -1;
 
       this.$('.list > li').each(function(index) {
         var id = $(this).data('id');
         if(id === item.get('id')) {
-          itemIndex = index;
+          newItemIndex = index;
         }
-        updatedList.push(id);
+        newSortOrder.push(id);
       });
 
-      var isFirstItem = itemIndex === 0;
-      var isLastItem = itemIndex === updatedList.length - 1;
-      var previousId = isFirstItem ? null : this.list.get(updatedList[itemIndex - 1]).get('id');
-      var nextId = isLastItem ? null : this.list.get(updatedList[itemIndex + 1]).get('id');
-
-      item.save(
-        {
-          previousId: previousId,
-          nextId: nextId
-        },
-        { patch: true }
-      );
+      this.list.updateSortOrderForItem(item, newSortOrder, newItemIndex);
 
     }
 
