@@ -1,15 +1,13 @@
 define(function(require) {
 
-  var Backbone = require('backbone'),
-    ajaxSync = require('components/ajaxSync'),
-    config = require('../config');
+  var Backbone = require('backbone');
+  var ajaxSync = require('components/ajaxSync');
+  var config = require('../config');
 
-  var Model = Backbone.Model.extend({
+  return Backbone.Model.extend({
 
     sync: ajaxSync({baseUrl: config.serverUrl})
 
   });
-
-  return Model;
 
 });

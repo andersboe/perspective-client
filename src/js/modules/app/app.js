@@ -1,12 +1,12 @@
 define(function(require) {
 
-  var _ = require('underscore'),
-    Router = require('router'),
-    View = require('base/view'),
-    Section = require('components/section'),
-    appTemplate = require('hb!./app');
+  var _ = require('underscore');
+  var Router = require('router');
+  var View = require('base/view');
+  var Section = require('components/section');
+  var appTemplate = require('hb!./app');
 
-  var App = View.extend({
+  return View.extend({
 
     template: appTemplate,
 
@@ -31,7 +31,5 @@ define(function(require) {
       done();
     }
   });
-
-  return App;
 
 });

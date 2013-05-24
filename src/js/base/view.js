@@ -1,10 +1,10 @@
 define(function(require) {
 
-  var Backbone = require('backbone'),
-    _ = require('underscore'),
-    SubViewHandler = require('components/subViewHandler');
+  var Backbone = require('backbone');
+  var _ = require('underscore');
+  var SubViewHandler = require('components/subViewHandler');
 
-  var View = Backbone.View.extend({
+  return Backbone.View.extend({
 
     constructor: function() {
       var subViewHandler = new SubViewHandler();
@@ -40,7 +40,5 @@ define(function(require) {
     }
 
   });
-
-  return View;
 
 });

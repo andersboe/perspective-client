@@ -21,9 +21,13 @@ define(function(require) {
     },
 
     destroySubViews: function() {
-      _.invoke(this.subViews, 'destroy');
+      _.each(this.subViews, function(subView) {
+        subView.destroy();
+        this.stopListening(subView);
+      }, this);
       this.subViews.length = 0;
     }
+
   });
 
   return SubViewHandler;
