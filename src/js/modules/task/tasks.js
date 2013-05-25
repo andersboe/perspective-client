@@ -6,8 +6,6 @@ define(function(require) {
 
     url: '/tasks',
 
-    comparator: 'priority',
-
     model: Task,
 
     updatePriorityForTask: function(task, newSortOrder, newIndexForItem) {
@@ -23,6 +21,20 @@ define(function(require) {
         },
         { patch: true }
       );
+    },
+
+    getLast: function() {
+      return this.at(this.length - 1);
+    },
+
+    create: function(attributes, options) {
+      var last = this.getLast();
+
+      if (last) {
+        attributes.lastItemInListId = last.get('id');
+      }
+
+      return Collection.prototype.create.call(this, attributes, options);
     }
 
   });
