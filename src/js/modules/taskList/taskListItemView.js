@@ -16,7 +16,8 @@ define(function(require) {
     template: taskListItem,
 
     events: {
-      'dragend': 'dragend'
+      'dragend': 'dragend',
+      'click .remove': 'removeTask'
     },
 
     bindings: {
@@ -32,6 +33,10 @@ define(function(require) {
       this.stickit(this.task);
       this.$el.attr('data-id', this.task.get('id'));
       return this;
+    },
+
+    removeTask: function() {
+      this.task.destroy();
     }
 
   });
