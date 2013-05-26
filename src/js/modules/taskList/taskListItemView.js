@@ -1,6 +1,6 @@
 define(function(require) {
 
-  var View = require('base/view')
+  var View = require('base/view');
   var taskListItem = require('hb!./taskListItem');
 
   return View.extend({

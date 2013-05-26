@@ -14,7 +14,8 @@
     "requirejs": "~2.1.5",
     "almond": "~0.2.5",
     "hb": "git@github.com:hinderberg/requirejs-handlebars-plugin.git",
-    "html5sortable": "https://raw.github.com/farhadi/html5sortable/master/jquery.sortable.js"
+    "html5sortable": "https://raw.github.com/farhadi/html5sortable/master/jquery.sortable.js",
+    "foundation-icons": "latest"
   },
   "devDependencies": {
     "chai": "latest",

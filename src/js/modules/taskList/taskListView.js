@@ -3,6 +3,7 @@ define(function(require) {
   var View = require('base/view');
   var taskListTemplate = require('hb!./taskList');
   var TaskListItemView = require('./taskListItemView');
+  var TaskInputView = require('./taskInputView');
 
   require('jQuerySortable');
 
@@ -11,7 +12,7 @@ define(function(require) {
     template: taskListTemplate,
 
     events: {
-      'keypress #new': 'createOnEnter'
+      "click #add": "setFocus"
     },
 
     initialize: function(options) {
@@ -31,9 +32,22 @@ define(function(require) {
 
       this.$('.list').html(items).sortable();
 
-      this.$input = this.$('#new');
+      this.renderInputView(this.$('.list-input'));
+
+      this.$addButton = this.$('#add');
 
       return this;
+    },
+
+    setFocus: function() {
+      this.taskInputView && this.taskInputView.focus();
+    },
+
+    renderInputView: function(el) {
+      this.taskInputView = this.taskInputView || new TaskInputView({ tasks: this.tasks });
+      this.addSubView(this.taskInputView);
+      this.taskInputView.setElement(el);
+      this.taskInputView.render();
     },
 
     renderTask: function(task) {
@@ -58,22 +72,6 @@ define(function(require) {
 
       this.tasks.updatePriorityForTask(item, newSortOrder, newIndexForItem);
 
-    },
-
-    createOnEnter: function (e) {
-      if (e.which !== 13 || !this.$input.val().trim()) {
-        return;
-      }
-
-      this.tasks.create(this.getListItemAttributes());
-
-      this.$input.val('');
-    },
-
-    getListItemAttributes: function () {
-      return {
-        title: this.$input.val().trim()
-      };
     }
 
   });
