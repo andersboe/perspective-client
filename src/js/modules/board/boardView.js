@@ -4,7 +4,13 @@ define(function(require) {
 
   return View.extend({
 
+    initialize: function(options) {
+      this.boardView = options.boardView;
+    },
 
+    render: function() {
+      this.renderTemplate();
+    }
 
   });
 
