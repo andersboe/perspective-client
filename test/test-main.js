@@ -20,6 +20,8 @@ requirejs.config({
     handlebars: '../libraries/hb/customHandlebars',
     hb: '../libraries/hb/hb',
 
+    jQuerySortable: '../libraries/html5sortable/index',
+
 
     'chai': '../libraries/chai/chai',
     'sinon': '../libraries/sinon/index',
@@ -36,6 +38,10 @@ requirejs.config({
     },
     backboneStickit: {
       deps: ['backbone']
+    },
+
+    jQuerySortable: {
+      deps: ['jquery']
     },
 
     'sinon': {

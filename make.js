@@ -34,7 +34,7 @@ var version = process.env.VERSION || moment().format('YYYYMMDD'),
 target.all = function() {
   target.check();
   target.jshint();
-  //target.test();
+  target.test();
   target.build();
 };
 
@@ -155,7 +155,7 @@ var npmBin = function(name) {
 
   var res = exec(bin + ' ' + _.rest(arguments).join(' '));
   done(res);
-}
+};
 
 var createCleanDir = function(dir) {
   if (test('-d', dir)) {

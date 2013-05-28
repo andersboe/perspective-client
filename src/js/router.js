@@ -1,9 +1,8 @@
 define(function(require) {
 
-  var BaseRouter = require('base/router'),
-    TaskListView = require('modules/taskList/taskListView'),
-    Tasks = require('modules/task/tasks'),
-    Task = require('modules/task/task');
+  var BaseRouter = require('base/router');
+  var TaskListView = require('modules/taskList/taskListView');
+  var Tasks = require('modules/task/tasks');
 
   var Router = BaseRouter.extend({
 

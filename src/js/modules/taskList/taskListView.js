@@ -4,6 +4,7 @@ define(function(require) {
   var taskListTemplate = require('hb!./taskList');
   var TaskListItemView = require('./taskListItemView');
   var TaskInputView = require('./taskInputView');
+  var $ = require('jquery');
 
   require('jQuerySortable');
 
@@ -34,13 +35,13 @@ define(function(require) {
 
       this.renderInputView(this.$('.list-input'));
 
-      this.$addButton = this.$('#add');
-
       return this;
     },
 
     setFocus: function() {
-      this.taskInputView && this.taskInputView.focus();
+      if (this.taskInputView) {
+        this.taskInputView.focus();
+      }
     },
 
     renderInputView: function(el) {

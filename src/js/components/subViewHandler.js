@@ -23,7 +23,6 @@ define(function(require) {
     destroySubViews: function() {
       _.each(this.subViews, function(subView) {
         subView.destroy();
-        this.stopListening(subView);
       }, this);
       this.subViews.length = 0;
     }

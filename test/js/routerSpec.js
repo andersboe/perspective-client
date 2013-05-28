@@ -1,11 +1,27 @@
 define(function(require) {
 
-  var router = require('router');
+  var Router = require('router');
+  var sinon = require('sinon');
+  var TaskListView = require('modules/taskList/taskListView');
 
-  describe('Router', function() {
-    it("its true", function() {
-      expect(true === true);
-    })
+  describe('router', function() {
+    it('show list', function() {
+      var spy = sinon.spy();
+
+      var sections = {};
+      sections.main = {
+        show: function() {
+          spy();
+          return { render: function(){} };
+        }
+      };
+
+      var router = new Router(sections);
+      router.list();
+
+      var args = spy.firstCall.args;
+      expect(args[0] instanceof TaskListView);
+    });
   });
 
 });
