@@ -50,6 +50,11 @@ target.test = function() {
   npmBin('karma', 'start', 'karma.conf.js', '--browsers PhantomJS', '--single-run');
 };
 
+target.testWatch = function() {
+  section('Running JavaScript tests');
+  npmBin('karma', 'start', 'karma.conf.js', '--browsers PhantomJS', '--auto-watch');
+};
+
 target.build = function() {
   createCleanDir(targetDir);
 
