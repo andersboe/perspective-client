@@ -18,7 +18,7 @@ define(function(require) {
       var tasks = new Tasks();
       var listView = new TaskListView({tasks: tasks});
       this.sections.main.show(listView).render();
-      tasks.fetch();
+      tasks.fetch({reset: true});
     }
   });
 
