@@ -1,6 +1,7 @@
 define(function(require) {
   var Collection = require('base/collection');
   var Task = require('./task');
+  var _ = require('underscore');
 
   return Collection.extend({
 
@@ -8,7 +9,8 @@ define(function(require) {
 
     model: Task,
 
-    updatePriorityForTask: function(task, newSortOrder, newIndexForItem) {
+    updatePriorityForTask: function(task, newSortOrder) {
+      var newIndexForItem = _.indexOf(newSortOrder, task.get("id"));
       var isFirstItem = newIndexForItem === 0;
       var isLastItem = newIndexForItem === newSortOrder.length - 1;
       var previousId = isFirstItem ? null : this.get(newSortOrder[newIndexForItem - 1]).get('id');

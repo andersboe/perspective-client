@@ -60,18 +60,13 @@ define(function(require) {
     },
 
     updateSort: function(item) {
-      var newSortOrder = [],
-          newIndexForItem = -1;
-
-      this.$('.list > li').each(function(index) {
+      var newSortOrder = [];
+      this.$('.list > li').each(function() {
         var id = $(this).data('id');
-        if(id === item.get('id')) {
-          newIndexForItem = index;
-        }
         newSortOrder.push(id);
       });
 
-      this.tasks.updatePriorityForTask(item, newSortOrder, newIndexForItem);
+      this.tasks.updatePriorityForTask(item, newSortOrder);
 
     }
 
