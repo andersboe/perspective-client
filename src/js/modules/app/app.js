@@ -21,7 +21,8 @@ define(function(require) {
     run: function(done) {
 
       this.addSections({
-        "main": "#main"
+        "main": "#main",
+        "overlay": "#overlay"
       });
 
       this.renderTemplate();
