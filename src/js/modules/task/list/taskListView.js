@@ -44,10 +44,10 @@ define(function(require) {
       }
     },
 
-    renderInputView: function(el) {
+    renderInputView: function($el) {
       this.taskInputView = this.taskInputView || new TaskInputView({ tasks: this.tasks });
       this.addSubView(this.taskInputView);
-      this.taskInputView.setElement(el);
+      this.taskInputView.setElement($el);
       this.taskInputView.render();
     },
 
