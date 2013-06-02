@@ -29,7 +29,7 @@ define(function(require) {
     },
 
     render: function() {
-      this.renderTemplate();
+      this.renderTemplate(this.task.toJSON());
       this.stickit(this.task);
       this.$el.attr('data-id', this.task.get('id'));
       return this;
