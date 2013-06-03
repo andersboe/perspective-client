@@ -26,11 +26,21 @@ define(function(require) {
       this.$el.show();
       view.setElement(this.$('.window-view-placeholder'));
       view.render();
+      var that = this;
+      _.defer(function() {
+        that.$(".window").addClass('active');
+      });
     },
 
     hide: function() {
       this.destroySubViews();
-      this.$el.hide();
+      this.$(".window").removeClass('active');
+
+      var that = this;
+      this.$(".window")[0].addEventListener('transitionend', function() {
+        that.$el.hide();
+      }, false);
+
       this.hideFunction();
     }
 
