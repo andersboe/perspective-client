@@ -8,10 +8,16 @@ define(function(require) {
 
   var OverlayView = require('modules/overlay/overlayView');
 
+  var MenuView = require('modules/menu/menuView');
+
   var Router = BaseRouter.extend({
 
     initialize: function(sections) {
       this.sections = sections;
+
+      this.menuView = new MenuView();
+      this.sections.menu.show(this.menuView);
+      this.menuView.render();
     },
 
     routes: {

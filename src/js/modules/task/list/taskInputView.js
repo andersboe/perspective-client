@@ -34,6 +34,7 @@ define(function(require) {
       this.tasks.create(this.getListItemAttributes());
 
       this.$input.val('');
+      this.$input.focus();
     },
 
     getListItemAttributes: function () {

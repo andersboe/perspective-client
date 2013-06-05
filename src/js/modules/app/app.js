@@ -22,7 +22,8 @@ define(function(require) {
 
       this.addSections({
         "main": "#main",
-        "overlay": "#overlay"
+        "overlay": "#overlay",
+        "menu": "#menu"
       });
 
       this.renderTemplate();
