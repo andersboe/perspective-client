@@ -9,19 +9,34 @@ define(function(require) {
   var OverlayView = require('modules/overlay/overlayView');
 
   var MenuView = require('modules/menu/menuView');
+  var MenuItem = require('modules/menu/menuItem');
+  var MenuItems = require('modules/menu/menuItems');
 
   var Router = BaseRouter.extend({
 
     initialize: function(sections) {
       this.sections = sections;
 
-      this.menuView = new MenuView();
+      var menuItems = new MenuItems([
+        new MenuItem({
+          iconClass: 'icon-th-list',
+          link: '#list'
+        }),
+        new MenuItem({
+          iconClass: 'icon-columns',
+          link: '#board'
+        })
+      ]);
+
+      this.menuView = new MenuView({menuItems: menuItems});
       this.sections.menu.show(this.menuView);
       this.menuView.render();
     },
 
     routes: {
       '': 'list',
+      'list': 'list',
+      'board': 'boards',
       'task/:id': 'taskDetail'
     },
 
@@ -39,6 +54,10 @@ define(function(require) {
       this.showInOverlay(taskDetailView);
 
       task.fetch();
+    },
+
+    boards: function() {
+
     },
 
     showInOverlay: function(view) {

@@ -10,8 +10,12 @@ define(function(require) {
 
     tagName: 'li',
 
+    initialize: function(options) {
+      this.menuItem = options.menuItem;
+    },
+
     render: function() {
-      this.renderTemplate();
+      this.renderTemplate(this.menuItem.toJSON());
       return this;
     }
 

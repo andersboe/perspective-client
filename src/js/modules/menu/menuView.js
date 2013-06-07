@@ -8,18 +8,21 @@ define(function(require) {
 
     template: menuTemplate,
 
-    initialize: function() {
-      this.listView = new MenuItemView();
-      this.boardView = new MenuItemView();
-
-      this.addSubView(this.listView);
-      this.addSubView(this.boardView);
+    initialize: function(options) {
+      this.menuItems = options.menuItems;
     },
 
     render: function() {
+      this.destroySubViews();
       this.renderTemplate();
 
-      this.$('.menu-list').html([this.listView.render().el, this.boardView.render().el]);
+      var items = this.menuItems.map(function(menuItem) {
+        var menuItemView = new MenuItemView( {menuItem: menuItem});
+        this.addSubView(menuItemView);
+        return menuItemView.render().el;
+      }, this);
+
+      this.$('.menu-list').html(items);
 
       return this;
     }
