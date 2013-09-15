@@ -1,11 +1,14 @@
 define(function(require) {
 
+  var _ = require('underscore');
   var BaseRouter = require('base/router');
 
   var TaskListView = require('modules/task/list/taskListView');
   var Task = require('modules/task/task');
   var Tasks = require('modules/task/tasks');
   var TaskDetailView = require('modules/task/detail/taskDetailView');
+
+  var BoardView = require('modules/board/boardView');
 
   var OverlayView = require('modules/overlay/overlayView');
 
@@ -58,7 +61,39 @@ define(function(require) {
     },
 
     boards: function() {
+      var tasks = new Tasks();
 
+      var columnConfig = [
+        {
+          title: "Backlog",
+          filter: function(task) {
+            return _.isUndefined(task.get('labels'));
+          }
+        },
+        {
+          title: "Todo",
+          newTaskProperties: {
+            labels: [1]
+          },
+          filter: function(task) {
+            return _.contains(task.get('labels'), 1);
+          }
+        },
+        {
+          title: "In progress",
+          newTaskProperties: {
+            labels: [2]
+          },
+          filter: function(task) {
+            return _.contains(task.get('labels'), 2);
+          }
+        }
+      ];
+
+      var view = new BoardView({tasks: tasks, columns: columnConfig});
+
+      this.sections.main.show(view).render();
+      tasks.fetch();
     },
 
     showInOverlay: function(view) {

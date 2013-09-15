@@ -19,7 +19,7 @@ requirejs.config({
     hb: '../libraries/hb/hb',
 
     jQuerySortable: '../libraries/html5sortable/index',
-
+    testHelper: '/base/test/js/testHelper',
 
     'chai': '../libraries/chai/chai',
     'sinon': '../libraries/sinon/index',

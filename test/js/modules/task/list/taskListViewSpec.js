@@ -30,6 +30,7 @@ define(function(require){
       view.render();
 
       expect(view.$(".list li").length).toBe(1);
+      expect(view.$(".list li:first-child").text()).toEqual("task 1");
     });
   });
 });

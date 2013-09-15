@@ -27,7 +27,6 @@ define(function(require) {
       var items = this.tasks.filter(this.filter).map(function(item) {
         return this.renderTask(item);
       }, this);
-
       this.$('.list').html(items).sortable();
 
       this.renderInputView(this.$('.list-input'));
@@ -35,14 +34,11 @@ define(function(require) {
       return this;
     },
 
-    setFocus: function() {
-      if (this.taskInputView) {
-        this.taskInputView.focus();
-      }
-    },
-
     renderInputView: function($el) {
       this.taskInputView = this.taskInputView || new TaskInputView({ tasks: this.tasks });
+      if(this.delegate) {
+        this.taskInputView.delegate = this.delegate;
+      }
       this.addSubView(this.taskInputView);
       this.taskInputView.setElement($el);
       this.taskInputView.render();
