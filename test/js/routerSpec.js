@@ -2,7 +2,7 @@ define(function(require) {
 
   var Router = require('router');
   var sinon = require('sinon');
-  var TaskListView = require('modules/taskList/taskListView');
+  var TaskListView = require('modules/task/list/taskListView');
 
   describe('router', function() {
     it('show list', function() {
@@ -10,17 +10,20 @@ define(function(require) {
 
       var sections = {};
       sections.main = {
-        show: function() {
-          spy();
+        show: function(view) {
+          spy(view);
           return { render: function(){} };
         }
       };
+      sections.menu = {
+        show: function() {}
+      }
 
       var router = new Router(sections);
       router.list();
 
       var args = spy.firstCall.args;
-      expect(args[0] instanceof TaskListView);
+      expect(args[0] instanceof TaskListView).toBeTruthy();
     });
   });
 

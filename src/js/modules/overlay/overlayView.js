@@ -1,5 +1,6 @@
 define(function(require) {
 
+  var _ = require('underscore');
   var View = require('base/view');
   var overlayTemplate = require('hb!./overlay');
 

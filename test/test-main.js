@@ -6,8 +6,6 @@ var preIncluded = ['chai', 'sinon', 'sinon-chai', 'jasmine-sinon'];
 var deps = preIncluded.concat(tests);
 
 requirejs.config({
-  urlArgs: 'v=' + Math.random(),
-
   baseUrl: '/base/src/js',
   paths: {
     config: 'config',
