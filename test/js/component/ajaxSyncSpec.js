@@ -1,7 +1,8 @@
 define(function(require) {
 
   var Backbone = require('backbone'),
-    sync = require('components/ajaxSync')({baseUrl: "/rest"});
+    sync = require('components/ajaxSync')({baseUrl: "/rest"}),
+    sinon = require('sinon');
 
   describe('sync', function() {
 
@@ -50,7 +51,7 @@ define(function(require) {
       it('the url is specified as a function in the model', function() {
         model.url = function() {
           return '/model-func';
-        }
+        };
 
         sync(method, model, options);
 

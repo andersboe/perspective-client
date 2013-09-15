@@ -1,7 +1,9 @@
 define(function(require) {
 
   var App = require('modules/app/app'),
-    Section = require('components/section');
+    Section = require('components/section'),
+    $ = require('jquery'),
+    sinon = require('sinon');
 
   describe('app', function() {
 

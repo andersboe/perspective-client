@@ -26,6 +26,11 @@
     "document": true,
     "define": true,
     "require": true,
-    "window": true
+    "window": true,
+    "describe": true,
+    "it": true,
+    "expect": true,
+    "beforeEach": true,
+    "afterEach": true
   }
 }

@@ -17,7 +17,7 @@ define(function(require) {
       };
       sections.menu = {
         show: function() {}
-      }
+      };
 
       var router = new Router(sections);
       router.list();

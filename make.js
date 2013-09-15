@@ -39,10 +39,11 @@ target.all = function() {
 };
 
 target.jshint = function() {
-  var files = glob.sync(path.join(appDir, 'js', '**', '*.js'));
+  var srcFiles = glob.sync(path.join(appDir, 'js', '**', '*.js'));
+  var testFiles = glob.sync(path.join('test', 'js', '**', '*.js'));
 
   section('Running JSHint');
-  npmBin('jshint', '--config ' + jshintConfig, files.join(' '));
+  npmBin('jshint', '--config ' + jshintConfig, srcFiles.concat(testFiles).join(' '));
 };
 
 target.test = function() {
