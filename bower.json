@@ -7,7 +7,7 @@
     "src/libraries"
   ],
   "dependencies": {
-    "backbone": "master",
+    "backbone": "https://github.com/jashkenas/backbone.git#cfe44928636dc19d1a57857137bff2414576e88a",
     "underscore": "~1.4.4",
     "backbone.stickit": "~0.6.3",
     "jquery": "~2.0.3",
