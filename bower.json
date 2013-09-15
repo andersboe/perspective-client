@@ -7,10 +7,10 @@
     "src/libraries"
   ],
   "dependencies": {
-    "backbone": "~1.0.0",
+    "backbone": "master",
     "underscore": "~1.4.4",
     "backbone.stickit": "~0.6.3",
-    "jquery": "~2.0.0",
+    "jquery": "~2.0.3",
     "requirejs": "~2.1.5",
     "almond": "~0.2.5",
     "hb": "git@github.com:hinderberg/requirejs-handlebars-plugin.git",
