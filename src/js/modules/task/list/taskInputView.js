@@ -6,18 +6,19 @@ define(function(require) {
   return View.extend({
 
     initialize: function(options) {
+      options = options || {};
       this.tasks = options.tasks;
     },
 
     template: taskInput,
 
     events: {
-      'keypress #new-task-input': 'createOnEnter'
+      'submit': 'createTask'
     },
 
     render: function() {
       this.renderTemplate();
-      this.$input = this.$('#new-task-input');
+      this.$input = this.$('.new-task-input');
 
       return this;
     },
@@ -26,20 +27,27 @@ define(function(require) {
       this.$input.focus();
     },
 
-    createOnEnter: function (e) {
-      if (e.which !== 13 || !this.$input.val().trim()) {
+    createTask: function (e) {
+      e.preventDefault();
+
+      if (!this.$input.val().trim()) {
         return;
       }
 
-      this.tasks.create(this.getListItemAttributes());
+      var task = this.getListItemAttributes();
+      if(this.delegate && this.delegate.willCreateTask) {
+        this.delegate.willCreateTask(task);
+      }
+      this.tasks.create(task);
 
       this.$input.val('');
       this.$input.focus();
     },
 
     getListItemAttributes: function () {
+      var view = this;
       return {
-        title: this.$input.val().trim()
+        title: view.$input.val().trim()
       };
     }
 
