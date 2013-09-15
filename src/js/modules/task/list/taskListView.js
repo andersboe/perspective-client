@@ -12,12 +12,9 @@ define(function(require) {
 
     template: taskListTemplate,
 
-    events: {
-      "click #add": "setFocus"
-    },
-
     initialize: function(options) {
       this.tasks = options.tasks;
+      this.filter = options.filter || function() {return true;};
 
       this.listenTo(this.tasks, 'add', this.render);
       this.listenTo(this.tasks, 'reset', this.render);
@@ -27,7 +24,7 @@ define(function(require) {
       this.destroySubViews();
       this.renderTemplate();
 
-      var items = this.tasks.map(function(item) {
+      var items = this.tasks.filter(this.filter).map(function(item) {
         return this.renderTask(item);
       }, this);
 
@@ -67,9 +64,6 @@ define(function(require) {
       });
 
       this.tasks.updatePriorityForTask(item, newSortOrder);
-
     }
-
   });
-
 });
