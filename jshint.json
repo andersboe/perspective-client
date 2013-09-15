@@ -20,6 +20,7 @@
   "maxdepth": 5,
   "maxstatements": 15,
   "maxcomplexity": 5,
+  "indent": 2,
   "maxlen": 120,
   "globals": {
     "document": true,
