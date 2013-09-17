@@ -29,14 +29,14 @@ define(function(require) {
       return this.at(this.length - 1);
     },
 
-    create: function(attributes, options) {
+    create: function(modelAttributes, options) {
       var last = this.getLast();
 
       if (last) {
-        attributes.lastItemInListId = last.get('id');
+        modelAttributes.lastItemInListId = last.get('id');
       }
 
-      return Collection.prototype.create.call(this, attributes, options);
+      return Collection.prototype.create.call(this, modelAttributes, options);
     }
 
   });

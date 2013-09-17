@@ -33,7 +33,12 @@ define(function(require) {
       });
     },
 
-    hide: function() {
+    hide: function(e) {
+
+      if (this.$(e.target).length !== 0) {
+        return;
+      }
+
       this.destroySubViews();
       this.$(".window").removeClass('active');
 

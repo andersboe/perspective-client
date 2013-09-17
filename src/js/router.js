@@ -99,9 +99,11 @@ define(function(require) {
     showInOverlay: function(view) {
 
       if (!this.overlayView) {
-        this.overlayView = new OverlayView({hideFunction: function() {
-          window.history.back();
-        }});
+        this.overlayView = new OverlayView({
+          hideFunction: function() {
+            window.history.back();
+          }
+        });
 
         this.sections.overlay.show(this.overlayView);
       }
