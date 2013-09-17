@@ -1,6 +1,7 @@
 define(function(require){
   var TaskListView = require("modules/task/list/taskListView");
   var Tasks = require("modules/task/tasks");
+  var sinon = require("sinon");
 
   describe("task list view", function() {
     var tasks;
@@ -19,6 +20,25 @@ define(function(require){
       view.render();
 
       expect(view.$(".list li").length).toBe(3);
+    });
+
+    it("should enable sorting of tasks when rendered or updated", function() {
+      var view = new TaskListView({tasks: tasks});
+      var sortSpy = sinon.spy(view, "refreshSorting");
+
+      view.render();
+
+      expect(sortSpy).toHaveBeenCalledOnce();
+
+      tasks.add({title: "task 4"});
+
+      expect(sortSpy).toHaveBeenCalledTwice();
+
+      tasks.reset([{title: "task 4"}]);
+
+      expect(sortSpy).toHaveBeenCalledThrice();
+
+      sortSpy.restore();
     });
 
     it("should only render filtered tasks, if a filter is supplied", function() {

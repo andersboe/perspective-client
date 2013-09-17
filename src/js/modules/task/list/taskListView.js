@@ -1,20 +1,21 @@
 define(function(require) {
 
-  var View = require('base/view');
+  var SortableView = require("base/sortableView");
   var taskListTemplate = require('hb!./taskList');
   var TaskListItemView = require('./taskListItemView');
   var TaskInputView = require('./taskInputView');
   var $ = require('jquery');
 
-  require('jQuerySortable');
-
-  return View.extend({
+  return SortableView.extend({
 
     template: taskListTemplate,
 
     initialize: function(options) {
       this.tasks = options.tasks;
       this.filter = options.filter || function() {return true;};
+      this.sortOptions = {
+        listSelector: ".list"
+      };
 
       this.listenTo(this.tasks, 'add', this.render);
       this.listenTo(this.tasks, 'reset', this.render);
@@ -27,8 +28,9 @@ define(function(require) {
       var items = this.tasks.filter(this.filter).map(function(item) {
         return this.renderTask(item);
       }, this);
-      this.$('.list').html(items).sortable();
 
+      this.$('.list').html(items);
+      this.refreshSorting();
       this.renderInputView(this.$('.list-input'));
 
       return this;
