@@ -21,7 +21,7 @@ define(function(require) {
       // Remove the view from the DOM
       this.remove();
 
-      // Recusively destroy all subviews
+      // Recursively destroy all subviews
       this.destroySubViews();
     },
 
