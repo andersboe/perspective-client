@@ -39,7 +39,7 @@ define(function(require) {
     },
 
     save: function() {
-      this.task.set('title', this.$editText().value);
+      this.task.set('title', this.$editText().val());
       this.$titleHeading().removeClass('hidden');
       this.$editArea().addClass('hidden');
       this.task.save();
