@@ -11,7 +11,9 @@ Perspective is split into multiple parts. You are now looking at the front-end w
 
 1. Install [perspective-api](https://github.com/perspective/perspective-api)
 2. Install desired plugins from `perspective-pluginrep` (not implemented yet)
-3. Clone this repo and run [index.html](index.html)
+3. Clone this repo
+4. Run `bower install`
+5. Run [index.html](index.html)
 
 ## Goals
 * Provide each member of a team with the information most relevant to them
@@ -36,10 +38,3 @@ Perspective is split into multiple parts. You are now looking at the front-end w
 	* RethinkDB
 * perspective
 	* Responsive
-
-## TODO
-* Prioritize tasks (ie. product backlog)
-* Scrum/kanban board
-* Tests
-* Front-end build pipeline, r.js
-* Binary and NPM package for client
