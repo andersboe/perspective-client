@@ -12,9 +12,6 @@
   mainConfigFile: 'src/js/main.js',
   preserveLicenseComments: true,
   logLevel: 0,
-  stubModules: ['text', 'hb'],
-  optimize: 'uglify2',
-  pragmasOnSave: {
-    excludeHandlebars: true
-  }
+  stubModules: ['text', 'rv'],
+  optimize: 'uglify2'
 })
