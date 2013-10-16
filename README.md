@@ -38,3 +38,8 @@ Perspective is split into multiple parts. You are now looking at the front-end w
 	* RethinkDB
 * perspective
 	* Responsive
+
+License
+-------
+
+MIT
