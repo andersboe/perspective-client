@@ -15,7 +15,9 @@
   ],
   "license": "MIT",
   "readmeFilename": "README.md",
-  "main": "server.js",
+  "bin": {
+    "perspective-client": "./bin/server.js"
+  },
   "scripts": {
     "test": "node make.js test"
   },
