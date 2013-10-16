@@ -1,8 +1,10 @@
+#!/usr/bin/env node
+
 var express = require('express');
 var app = express();
 
 app.configure(function() {
-  return app.use(express["static"](__dirname + '/src'));
+  return app.use(express.static(__dirname + '/src'));
 });
 
 app.all('*', function(request, response) {
