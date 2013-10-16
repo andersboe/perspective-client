@@ -1,29 +1,27 @@
 define(function(require) {
 
+  var $ = require('jquery');
   var Router = require('router');
-  var sinon = require('sinon');
-  var TaskListView = require('modules/task/list/taskListView');
+  var Sections = require('section/sections');
+  var page = require('page');
+
+  var sections = new Sections({
+    "main": $("#main")
+  });
 
   describe('router', function() {
-    it('show list', function() {
-      var spy = sinon.spy();
+    describe('constructor', function() {
+      it('sets sections', function() {
+        var router = new Router({sections: sections});
+        expect(router.sections).toBeDefined();
 
-      var sections = {};
-      sections.main = {
-        show: function(view) {
-          spy(view);
-          return { render: function(){} };
-        }
-      };
-      sections.menu = {
-        show: function() {}
-      };
+      });
 
-      var router = new Router(sections);
-      router.list();
-
-      var args = spy.firstCall.args;
-      expect(args[0] instanceof TaskListView).toBeTruthy();
+      it('adds page callbacks', function() {
+        page.callbacks.length = 0;
+        var router = new Router({sections: sections});
+        expect(page.callbacks.length).toBe(3);
+      });
     });
   });
 

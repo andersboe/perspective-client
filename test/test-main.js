@@ -8,19 +8,14 @@ var deps = preIncluded.concat(tests);
 requirejs.config({
   baseUrl: '/base/src/js',
   paths: {
-    config: 'config',
-    jquery: '../libraries/jquery/jquery',
     underscore: '../libraries/underscore/underscore',
-    backbone: '../libraries/backbone/backbone',
-    backboneStickit: '../libraries/backbone.stickit/backbone.stickit',
-
+    Ractive: '../libraries/ractive/Ractive',
     text: '../libraries/text/text',
-    handlebars: '../libraries/hb/customHandlebars',
-    hb: '../libraries/hb/hb',
+    rv: '../libraries/rv/rv',
+    jquery: '../libraries/jquery/jquery',
+    page: '../libraries/page/index',
 
-    jQuerySortable: '../libraries/html5sortable/index',
     testHelper: '/base/test/js/testHelper',
-
     'chai': '../libraries/chai/chai',
     'sinon': '../libraries/sinon/index',
     'jasmine-sinon': '../libraries/jasmine-sinon/lib/jasmine-sinon',
@@ -30,28 +25,14 @@ requirejs.config({
     underscore: {
       exports: '_'
     },
-    backbone: {
-      deps: ['underscore', 'jquery'],
-      exports: 'Backbone'
+    page: {
+      exports: 'page'
     },
-    backboneStickit: {
-      deps: ['backbone']
-    },
-
-    jQuerySortable: {
-      deps: ['jquery']
-    },
-
     'sinon': {
       exports: 'sinon'
     },
-
     'jasmine-sinon': ['sinon']
   },
-  hb: {
-    templateExtension: '.html'
-  },
-
   deps: deps,
   callback: window.__karma__.start
 });

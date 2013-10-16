@@ -4,7 +4,7 @@ define(function(require) {
   var Ractive = require('Ractive');
 
   return Ractive.extend({
-     template:template
+    template: template
   });
 
 });

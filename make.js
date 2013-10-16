@@ -25,8 +25,8 @@ var version = process.env.VERSION || moment().format('YYYYMMDD'),
   cssFileName = 'style-' + version + '.css',
   cssFile = path.join(targetDir, cssFileName),
 
-  rjsConfig = path.join('build-config.js'),
-  jshintConfig = path.join('jshint.json');
+  rjsConfig = path.join('./config/build-config.js'),
+  jshintConfig = path.join('./config/jshint.json');
 
 
 /*** TARGETS ********/
@@ -48,12 +48,12 @@ target.jshint = function() {
 
 target.test = function() {
   section('Running JavaScript tests');
-  npmBin('karma', 'start', 'karma.conf.js', '--browsers PhantomJS', '--single-run');
+  npmBin('karma', 'start', './config/karma.conf.js', '--browsers PhantomJS', '--single-run');
 };
 
 target.testWatch = function() {
   section('Running JavaScript tests');
-  npmBin('karma', 'start', 'karma.conf.js', '--browsers PhantomJS', '--auto-watch');
+  npmBin('karma', 'start', './config/karma.conf.js', '--browsers Chrome', '--auto-watch');
 };
 
 target.build = function() {

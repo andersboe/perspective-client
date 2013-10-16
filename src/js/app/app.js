@@ -1,40 +1,27 @@
 define(function(require) {
 
-  var _ = require('underscore');
-  var Section = require('section/section');
-
-  var appTemplate = require('rv!./app.html');
   var Ractive = require('Ractive');
+  var appTemplate = require('rv!./app.html');
+
+  var Sections = require('section/sections');
   var Router = require('router');
 
-  var sections = {};
-  var router;
-
-  function addSections(newSections) {
-    _.each(newSections, function(selector, name) {
-      sections[name] = new Section(selector);
-    }, this);
-  }
-
-
-  var App = Ractive.extend({
+  return Ractive.extend({
     template: appTemplate,
     start: function(done) {
-      addSections({
+      this.sections = new Sections({
         "main": "#main",
         "overlay": "#overlay",
         "menu": "#menu",
         "app": "#app"
       });
 
-      router = new Router({sections: sections});
+      this.router = new Router({sections: this.sections});
 
       if (done) {
         done();
       }
     }
   });
-
-  return App;
 
 });

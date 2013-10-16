@@ -13,15 +13,15 @@ define(function(require) {
     page();
   };
 
-  Router.prototype.index = function(context, next) {
+  Router.prototype.index = function() {
 
   };
 
-  Router.prototype.notFound = function(context, next) {
-    this.sections.main.show(NotFound)
+  Router.prototype.notFound = function() {
+    this.sections.main.show(NotFound);
   };
 
-  Router.prototype.list = function(context, next) {
+  Router.prototype.list = function() {
 
   };
 

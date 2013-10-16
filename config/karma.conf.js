@@ -1,12 +1,12 @@
 module.exports = function(config) {
     config.set({
-        basePath: '',
+        basePath: '..',
 
         frameworks: ['jasmine', 'requirejs'],
 
         // list of files / patterns to load in the browser
         files: [
-          { pattern: 'test/js/**/*.js', included: false },
+          { pattern: 'src/js/**/*Spec.js', included: false },
           { pattern: 'src/**/*.js', included: false },
           { pattern: 'src/js/**/*.html', included: false },
           'test/test-main.js'
