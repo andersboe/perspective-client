@@ -4,9 +4,11 @@
   "scripts": {
     "test": "node make.js test"
   },
+  "main": "server.js",
   "dependencies": {
     "optipng-bin": "~0.2.2",
-    "perspective-core": "*"
+    "perspective-core": "*",
+    "express": "~3.3.0"
   },
   "devDependencies": {
     "phantomjs": "1.9.0-3",

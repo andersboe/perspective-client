@@ -14,7 +14,7 @@ define(function(require) {
   };
 
   Router.prototype.index = function(context, next) {
-    this.sections.main.show(NotFound)
+
   };
 
   Router.prototype.notFound = function(context, next) {
@@ -22,8 +22,7 @@ define(function(require) {
   };
 
   Router.prototype.list = function(context, next) {
-    console.log("dhdhdh");
-    this.sections.main.show(NotFound)
+
   };
 
 
