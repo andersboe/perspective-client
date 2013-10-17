@@ -1,6 +1,7 @@
 define(function(require) {
 
   var NotFound = require('not_found/notFound');
+  var $ = require('jquery');
 
   describe('notFound', function() {
     it('renders a h2', function () {

@@ -1,7 +1,6 @@
 define(function(require) {
 
   var Section = require('section/section');
-  //var sinon = require('sinon');
 
   describe('Section', function() {
     describe('constructor', function() {
