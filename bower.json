@@ -26,6 +26,7 @@
     "sinon-chai":"latest",
     "sinon": "http://sinonjs.org/releases/sinon-1.6.0.js",
     "jasmine-sinon": "latest",
-    "less.js": "latest"
+    "less.js": "latest",
+    "jasmine-jquery": "~1.5.91"
   }
 }

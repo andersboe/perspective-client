@@ -53,7 +53,7 @@ target.test = function() {
 
 target.testWatch = function() {
   section('Running JavaScript tests');
-  npmBin('karma', 'start', './config/karma.conf.js', '--browsers Chrome', '--auto-watch');
+  npmBin('karma', 'start', './config/karma.conf.js', '--browsers PhantomJS', '--auto-watch');
 };
 
 target.build = function() {
