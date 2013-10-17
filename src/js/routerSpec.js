@@ -6,7 +6,7 @@ define(function(require) {
   var page = require('page');
 
   var sections = new Sections({
-    "main": $("#main")
+    "main": $("<div>")
   });
 
   describe('router', function() {
