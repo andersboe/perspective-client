@@ -2,9 +2,20 @@ define(function(require) {
 
   var App = require('app/app');
   var sinon = require('sinon');
+  var $ = require('jquery');
 
   describe('app', function () {
     var app;
+
+    it('has section markup', function() {
+      var $element = $('<div>');
+      app = new App({el: $element});
+
+      expect(app.el).toContain('#app');
+      expect(app.el).toContain('#menu');
+      expect(app.el).toContain('#main');
+      expect(app.el).toContain('#overlay');
+    });
 
     describe('start', function () {
 
