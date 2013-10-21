@@ -4,7 +4,8 @@ var express = require('express');
 var app = express();
 
 app.configure(function() {
-  return app.use(express.static(__dirname + '/src'));
+  app.use(express.static(__dirname + '/src'));
+  app.use(express.compress());
 });
 
 app.all('*', function(request, response) {
