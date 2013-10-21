@@ -12,6 +12,7 @@
   }
 
   li.jenkins-building_failed {
+    -webkit-animation: pulse 1s ease-out infinite alternate;
     background: #BE4856;
   }
 
@@ -20,6 +21,7 @@
   }
 
   li.jenkins-building_unstable {
+    -webkit-animation: pulse 1s ease-out infinite alternate;
     background: #DD9D9D;
   }
 
@@ -28,30 +30,52 @@
   }
 
   li.jenkins-building_ok {
+    -webkit-animation: pulse 1s ease-out infinite alternate;
     background: #0AA594;
   }
 
   li.jenkins-disabled {
+    span.name {
+      color: #000;
+    }
     background: #D1D3D4;
   }
 
   li.jenkins-building_disabled {
+    -webkit-animation: pulse 1s ease-out infinite alternate;
+    span.name {
+      color: #000;
+    }
     background: #D1D3D4;
   }
 
   li.jenkins-not_built {
+    span.name {
+      color: #000;
+    }
     background: #EBECEC;
   }
 
-  li.jenkins-budiling_not_built {
+  li.jenkins-building_not_built {
     background: #EBECEC;
+    -webkit-animation: pulse 1s ease-out infinite alternate;
+    span.name {
+      color: #000;
+    }
   }
 
   span.name {
-    font-size: 1.4em;
+    color: #fff;
+    font-size: 4rem;
   }
 
   span.text {
     display: block;
+    font-size: 2rem;
   }
+}
+
+@-webkit-keyframes pulse {
+      0% {opacity: 1.0}
+     100% {opacity: 0.3}
 }
