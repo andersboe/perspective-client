@@ -21,7 +21,6 @@
   },
   "dependencies": {
     "optipng-bin": "~0.2.2",
-    "perspective-core": "*",
     "express": "~3.3.0"
   },
   "devDependencies": {
