@@ -19,12 +19,26 @@ define(function(require) {
     disabled: 'Disabled',
     building_disabled: 'Building...',
     not_built: "I'm not built yet",
-    budiling_not_built: 'Yeehaa this is my first build'
+    building_not_built: "Yeehaa i'm building my first build..."
+  };
+
+  var simpleStatusForStatus = {
+    failed: 'sleeping',
+    building_failed: 'building',
+    unstable: 'sleeping',
+    building_unstable: 'building',
+    ok: 'sleeping',
+    building_ok: 'building',
+    disabled: 'sleeping',
+    building_disabled: 'building',
+    not_built: "sleeping",
+    building_not_built: 'building'
   };
 
   var toJobs = function(jobs) {
     return _.map(jobs, function(job) {
       job.text = textForStatus[job.status];
+      job.simpleStatus = simpleStatusForStatus[job.status];
       return job;
     });
   };
