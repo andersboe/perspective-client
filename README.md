@@ -13,7 +13,8 @@ Perspective is split into multiple parts. You are now looking at the front-end w
 2. Install desired plugins from `perspective-pluginrep` (not implemented yet)
 3. Clone this repo
 4. Run `bower install`
-5. Run [index.html](index.html)
+5. Run `npm install`
+6. Run `./server.js`
 
 ## Goals
 * Provide each member of a team with the information most relevant to them
