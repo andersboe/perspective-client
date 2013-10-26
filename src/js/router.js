@@ -43,9 +43,7 @@ define(function(require) {
 
     var router = this;
 
-    jenkinsData.ws(function() {
-      router.sections.main.currentView.update('jobs');
-    });
+    jenkinsData.ws();
   };
 
   return Router;

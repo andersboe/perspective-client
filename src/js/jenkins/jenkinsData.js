@@ -48,13 +48,12 @@ define(function(require) {
       var jenkins = this;
       request.get(config.serverUrl + '/jenkins').end(function(error, res){
         data.jobs = toJobs(res.body);
-        callback(data);
+        callback();
       });
     },
-    ws: function(callback) {
+    ws: function() {
       new WebSocketClient('jenkins').on('jobs_changed', function(jobs) {
         data.jobs = toJobs(jobs.data);
-        callback(data);
       });
     },
     data: data
