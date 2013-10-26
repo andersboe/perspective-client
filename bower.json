@@ -16,7 +16,7 @@
     "rv": "git@github.com:Rich-Harris/require-ractive-plugin.git#2cd78c24ac51cf686976d68a24d2aa23cd8b3bf7",
     "html5sortable": "https://raw.github.com/farhadi/html5sortable/master/jquery.sortable.js",
     "foundation-icons": "latest",
-    "perspective-core": "git@github.com:perspective/perspective-core.git",
+    "perspective-core-web-socket-helper": "git@github.com:perspective/perspective-core-web-socket-helper.git",
     "font-awesome": "latest",
     "text": "~2.0.10",
     "jquery": "latest"
