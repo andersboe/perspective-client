@@ -3,13 +3,15 @@ require.config({
   paths: {
     underscore: '../libraries/underscore/underscore',
     Ractive: '../libraries/ractive/Ractive',
-    ractiveObjectObserve: '../libraries/ractive-object-observe/ractive-object-observe',
+    ractiveObjectObserve: 'ractive-object-observe/ractive-object-observe',
     text: '../libraries/text/text',
     rv: '../libraries/rv/rv',
     jquery: '../libraries/jquery/jquery',
     page: '../libraries/page/index',
-    webSocketHelper: '../libraries/perspective-core/lib/webSocketHelper',
-    validation: '../libraries/perspective-core/lib/validation',
+    webSocketHelper: '../libraries/perspective-core-web-socket-helper/index',
+    'perspective-core': '../libraries/perspective-core/index',
+    'lib/validation': '../libraries/perspective-core/lib/validation',
+    'lib/model': '../libraries/perspective-core/lib/model',
     request: '../libraries/superagent/superagent'
   },
 
@@ -20,12 +22,12 @@ require.config({
     page: {
       exports: 'page'
     },
-    validation: {
-      deps: ['underscore'],
-      exports: 'validation'
+    'perspective-core': {
+      deps: ['underscore', 'lib/validation', 'lib/model'],
+      exports: 'perspective-core'
     },
     webSocketHelper: {
-      deps: ['underscore', 'validation'],
+      deps: ['underscore', 'perspective-core'],
       exports: 'webSocketHelper'
     }
   }

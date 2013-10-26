@@ -17,6 +17,7 @@
     "html5sortable": "https://raw.github.com/farhadi/html5sortable/master/jquery.sortable.js",
     "foundation-icons": "latest",
     "perspective-core-web-socket-helper": "git@github.com:perspective/perspective-core-web-socket-helper.git",
+    "perspective-core": "git@github.com:perspective/perspective-core.git",
     "font-awesome": "latest",
     "text": "~2.0.10",
     "jquery": "latest"
