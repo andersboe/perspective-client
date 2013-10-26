@@ -13,7 +13,7 @@
     "underscore": "~1.4.4",
     "requirejs": "~2.1.5",
     "almond": "~0.2.5",
-    "rv": "git@github.com:Rich-Harris/require-ractive-plugin.git",
+    "rv": "git@github.com:Rich-Harris/require-ractive-plugin.git#2cd78c24ac51cf686976d68a24d2aa23cd8b3bf7",
     "html5sortable": "https://raw.github.com/farhadi/html5sortable/master/jquery.sortable.js",
     "foundation-icons": "latest",
     "perspective-core": "git@github.com:perspective/perspective-core.git",
