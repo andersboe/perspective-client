@@ -10,6 +10,7 @@ requirejs.config({
   paths: {
     underscore: '../libraries/underscore/underscore',
     Ractive: '../libraries/ractive/Ractive',
+    ractiveObjectObserve: '../libraries/ractive-object-observe/ractive-object-observe',
     text: '../libraries/text/text',
     rv: '../libraries/rv/rv',
     jquery: '../libraries/jquery/jquery',

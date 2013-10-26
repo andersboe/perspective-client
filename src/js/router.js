@@ -5,6 +5,8 @@ define(function(require) {
   var Jenkins = require('jenkins/jenkinsView');
   var _ = require('underscore');
   var jenkinsData = require('jenkins/jenkinsData');
+  var TasksView = require('tasks/tasksView');
+  var tasks = require('tasks/tasks');
 
   var Router = function(options) {
     this.sections = options.sections;
@@ -24,7 +26,8 @@ define(function(require) {
   };
 
   Router.prototype.index = function() {
-
+    this.sections.main.show(TasksView, {data: {tasks: tasks}});
+    tasks.getAll();
   };
 
   Router.prototype.notFound = function() {

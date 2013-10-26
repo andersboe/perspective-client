@@ -3,6 +3,7 @@ require.config({
   paths: {
     underscore: '../libraries/underscore/underscore',
     Ractive: '../libraries/ractive/Ractive',
+    ractiveObjectObserve: '../libraries/ractive-object-observe/ractive-object-observe',
     text: '../libraries/text/text',
     rv: '../libraries/rv/rv',
     jquery: '../libraries/jquery/jquery',
@@ -30,8 +31,8 @@ require.config({
   }
 });
 
-require(['jquery', 'app/app'], function($, App) {
-
+require(['jquery', 'app/app', 'Ractive', 'ractiveObjectObserve'], function($, App, Ractive, objectObserve) {
+  Ractive.adaptors.ObjectObserve = objectObserve;
   var app = new App({ el: $('body') });
   app.start();
 

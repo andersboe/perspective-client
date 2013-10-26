@@ -11,6 +11,9 @@ define(function(require) {
       this.close();
 
       options = _.extend({el: this.selector}, options);
+      options.adaptors = ['ObjectObserve'];
+      options.modifyArrays = false;
+
       this.currentView = new View(options);
       return this.currentView;
     },
