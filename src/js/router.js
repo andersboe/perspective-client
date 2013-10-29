@@ -40,10 +40,6 @@ define(function(require) {
 
   Router.prototype.jenkins = function(ctx, next) {
     this.sections.main.show(Jenkins, {data: jenkinsData.data});
-
-    var router = this;
-
-    jenkinsData.ws();
   };
 
   return Router;

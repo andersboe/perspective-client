@@ -1,40 +1,40 @@
 define(function(require) {
 
   var webSocketHelper = require('webSocketHelper');
-  var config = require('config');
 
-  var socket = new WebSocket(config.webSocket.href, config.webSocket.protocol);
+  var WebSocketClient = function(config) {
+    var socket = this.socket = new WebSocket(config.href, config.protocol);
 
-  socket.onopen = function() {
-    console.log("WebSocket connection opened")
+    socket.onopen = function() {
+      console.log("WebSocket connection opened")
+    };
+
+    socket.onclose = function() {
+      console.log("WebSocket connection closed");
+    };
+
+    socket.onmessage = function(message) {
+      var errors = webSocketHelper.callCallbacksForMessage(message.data);
+
+      if (errors) {
+        console.log(errors);
+      }
+    };
   };
 
-  socket.onclose = function() {
-    console.log("WebSocket connection closed");
-  };
-
-  socket.onmessage = function(message) {
-    var errors = webSocketHelper.onMessage(message.data);
-
-    if (errors) {
-      console.log(errors);
+  WebSocketClient.prototype.createChannel = function(channel) {
+    var socket = this.socket;
+    return {
+      send: function(event, object) {
+        var jsonString = webSocketHelper.createJSONString(channel, event, object);
+        socket.send(jsonString);
+      },
+      on: function(event, callback) {
+        webSocketHelper.addCallbackToEventOnChannel(channel, event, callback);
+      }
     }
   };
 
-  var WebSocketClient = function(channel) {
-    this.channel = channel;
-  };
-
-  WebSocketClient.prototype.send = function(event, object) {
-    var jsonString = webSocketHelper.createJSONString(this.channel, event, object);
-    socket.send(jsonString);
-  };
-
-  WebSocketClient.prototype.on = function(event, callback) {
-    webSocketHelper.on(this.channel, event, callback);
-  };
-
-  WebSocketClient.prototype.standardEvents = webSocketHelper.standardEvents;
-
   return WebSocketClient;
+
 });

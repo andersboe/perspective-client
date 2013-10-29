@@ -1,8 +1,8 @@
 define(function(require) {
-  var WebSocketClient = require('web-socket/webSocketClient');
   var request = require('request');
   var config = require('config');
   var _ = require('underscore');
+  var wsJenkins = require('./wsJenkins');
 
   var data = {
     jobs: []
@@ -43,17 +43,16 @@ define(function(require) {
     });
   };
 
+  wsJenkins.createChannel("jenkins").on("jobs_changed", function(jobs) {
+    data.jobs = toJobs(jobs.data);
+  });
+
   return {
     get:function(callback) {
       var jenkins = this;
-      request.get(config.serverUrl + '/jenkins').end(function(error, res){
+      request.get(config.jenkinsUrl + '/jenkins').end(function(error, res){
         data.jobs = toJobs(res.body);
         callback();
-      });
-    },
-    ws: function() {
-      new WebSocketClient('jenkins').on('jobs_changed', function(jobs) {
-        data.jobs = toJobs(jobs.data);
       });
     },
     data: data
