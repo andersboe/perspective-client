@@ -1,10 +1,22 @@
 define(function() {
-  return {
-    tasksUrl: 'http://localhost:8889',
-    jenkinsUrl: 'http://localhost:8888',
+
+  var _config = {
+    tasksUrl: null,
+    jenkinsUrl: null,
     jenkinsWebSocket: {
-      href: 'ws://localhost:8888',
-      protocol: 'perspective-protocol'
-    } 
+      href: null,
+      protocol: null
+    },
+    port: null
   };
+
+  return {
+    setConfig: function(config) {
+      _config = config;
+    },
+    getConfig: function() {
+      return _config;
+    }
+  };
+
 });

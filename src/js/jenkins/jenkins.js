@@ -43,16 +43,16 @@ define(function(require) {
     });
   };
 
-  wsJenkins.createChannel("jenkins").on("jobs_changed", function(jobs) {
-    data.jobs = toJobs(jobs.data);
-  });
-
   return {
-    get:function(callback) {
+    getAll:function() {
       var jenkins = this;
-      request.get(config.jenkinsUrl + '/jenkins').end(function(error, res){
+      request.get(config.getConfig().jenkinsUrl + '/jenkins').end(function(error, res){
         data.jobs = toJobs(res.body);
-        callback();
+      });
+    },
+    listen: function() {
+      wsJenkins.client().channel("jenkins").on("jobs_changed", function(jobs) {
+        data.jobs = toJobs(jobs.data);
       });
     },
     data: data

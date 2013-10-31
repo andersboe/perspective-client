@@ -6,9 +6,12 @@ define(function(require) {
   var Sections = require('section/sections');
   var Router = require('router');
 
+  var config = require('config');
+  var wsJenkins = require('jenkins/wsJenkins');
+
   return Ractive.extend({
     template: appTemplate,
-    start: function(done) {
+    start: function(options) {
       this.sections = new Sections({
         "main": "#main",
         "overlay": "#overlay",
@@ -16,11 +19,10 @@ define(function(require) {
         "app": "#app"
       });
 
-      this.router = new Router({sections: this.sections});
+      config.setConfig(options.config);
+      wsJenkins.createConnection(config.getConfig().jenkinsWebSocket);
 
-      if (done) {
-        done();
-      }
+      this.router = new Router({sections: this.sections});
     }
   });
 

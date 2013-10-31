@@ -4,7 +4,7 @@ define(function(require) {
   var NotFound = require('not_found/notFound');
   var Jenkins = require('jenkins/jenkinsView');
   var _ = require('underscore');
-  var jenkinsData = require('jenkins/jenkinsData');
+  var jenkins = require('jenkins/jenkins');
   var TasksView = require('tasks/tasksView');
   var tasks = require('tasks/tasks');
 
@@ -13,13 +13,7 @@ define(function(require) {
 
     page('/', _.bind(this.index, this));
     page('/list', _.bind(this.list, this));
-    page('/jenkins', function(ctx, next) {
-
-      jenkinsData.get(function() {
-        next();
-      });
-
-    }, _.bind(this.jenkins, this));
+    page('/jenkins', _.bind(this.jenkins, this));
 
     page('/*', _.bind(this.notFound, this));
     page();
@@ -39,7 +33,9 @@ define(function(require) {
   };
 
   Router.prototype.jenkins = function(ctx, next) {
-    this.sections.main.show(Jenkins, {data: jenkinsData.data});
+    jenkins.listen();
+    this.sections.main.show(Jenkins, {data: jenkins.data});
+    jenkins.getAll();
   };
 
   return Router;

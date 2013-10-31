@@ -4,16 +4,16 @@ define(function(require) {
 
   var Tasks = function() {
     this.list = [];
-  }
+  };
 
   Tasks.prototype = {
-    getAll: function(callback) {
+    getAll: function() {
       var tasks = this;
-      request.get(config.serverUrl + "/tasks", function(res) {
+      request.get(config.getConfig().tasksUrl + "/tasks", function(res) {
          tasks.list = res.body;
       });
     }
-  }
+  };
 
   return new Tasks();
 });

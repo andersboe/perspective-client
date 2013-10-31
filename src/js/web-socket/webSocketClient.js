@@ -22,7 +22,7 @@ define(function(require) {
     };
   };
 
-  WebSocketClient.prototype.createChannel = function(channel) {
+  WebSocketClient.prototype.channel = function(channel) {
     var socket = this.socket;
     return {
       send: function(event, object) {
@@ -31,6 +31,9 @@ define(function(require) {
       },
       on: function(event, callback) {
         webSocketHelper.addCallbackToEventOnChannel(channel, event, callback);
+      },
+      off: function(event, callback) {
+        webSocketHelper.removeCallbackForEventOnChannel(channel, event, callback);
       }
     }
   };
