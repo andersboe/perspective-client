@@ -2,7 +2,7 @@ module.exports = function(config) {
     config.set({
         basePath: '..',
 
-        frameworks: ['jasmine', 'requirejs'],
+        frameworks: ['mocha', 'requirejs'],
 
         // list of files / patterns to load in the browser
         files: [
@@ -65,7 +65,7 @@ module.exports = function(config) {
         reportSlowerThan: 500,
 
         plugins: [
-          'karma-jasmine',
+          'karma-mocha',
           'karma-chrome-launcher',
           'karma-phantomjs-launcher',
           "karma-requirejs"

@@ -12,12 +12,7 @@ define(function(require) {
   return Ractive.extend({
     template: appTemplate,
     start: function(options) {
-      this.sections = new Sections({
-        "main": "#main",
-        "overlay": "#overlay",
-        "menu": "#menu",
-        "app": "#app"
-      });
+      this.sections = new Sections(options.sections);
 
       config.setConfig(options.config);
       wsJenkins.createConnection(config.getConfig().jenkinsWebSocket);

@@ -2,7 +2,7 @@ var tests = Object.keys(window.__karma__.files).filter(function(file) {
   return /Spec\.js$/.test(file);
 });
 
-var preIncluded = ['jasmine-jquery', 'chai', 'sinon', 'sinon-chai', 'jasmine-sinon'];
+var preIncluded = ['chai', 'sinon', 'sinon-chai'];
 var deps = preIncluded.concat(tests);
 
 requirejs.config({
@@ -10,18 +10,24 @@ requirejs.config({
   paths: {
     underscore: '../libraries/underscore/underscore',
     Ractive: '../libraries/ractive/Ractive',
-    ractiveObjectObserve: '../libraries/ractive-object-observe/ractive-object-observe',
+    ractiveObjectObserve: 'ractive-object-observe/ractive-object-observe',
     text: '../libraries/text/text',
     rv: '../libraries/rv/rv',
     jquery: '../libraries/jquery/jquery',
     page: '../libraries/page/index',
+    webSocketHelper: '../libraries/perspective-core-web-socket-helper/index',
+    'perspective-core': '../libraries/perspective-core/index',
+    'lib/validation': '../libraries/perspective-core/lib/validation',
+    'lib/model': '../libraries/perspective-core/lib/model',
+    request: '../libraries/superagent/superagent',
+
+
 
     testHelper: '/base/test/js/testHelper',
     'chai': '../libraries/chai/chai',
     'sinon': '../libraries/sinon/index',
-    'jasmine-sinon': '../libraries/jasmine-sinon/lib/jasmine-sinon',
     'sinon-chai': '../libraries/sinon-chai/lib/sinon-chai',
-    'jasmine-jquery': '../libraries/jasmine-jquery/lib/jasmine-jquery'
+    'squire': '../libraries/squire/src/Squire'
   },
   shim: {
     underscore: {
@@ -30,13 +36,25 @@ requirejs.config({
     page: {
       exports: 'page'
     },
+    'perspective-core': {
+      deps: ['underscore', 'lib/validation', 'lib/model'],
+      exports: 'perspective-core'
+    },
+    webSocketHelper: {
+      deps: ['underscore', 'perspective-core'],
+      exports: 'webSocketHelper'
+    },
+
+
+
     'sinon': {
       exports: 'sinon'
-    },
-    'jasmine-sinon': ['sinon'],
-    'jasmine-jquery': ['jquery']
+    }
   },
-  deps: deps,
-  callback: window.__karma__.start
+  deps: deps
 });
 
+
+require(tests, function () {
+  window.__karma__.start()
+});

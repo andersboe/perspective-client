@@ -6,7 +6,7 @@ define(function(require) {
     var socket = this.socket = new WebSocket(config.href, config.protocol);
 
     socket.onopen = function() {
-      console.log("WebSocket connection opened")
+      console.log("WebSocket connection opened");
     };
 
     socket.onclose = function() {
@@ -35,7 +35,7 @@ define(function(require) {
       off: function(event, callback) {
         webSocketHelper.removeCallbackForEventOnChannel(channel, event, callback);
       }
-    }
+    };
   };
 
   return WebSocketClient;

@@ -44,7 +44,12 @@ require(['jquery', 'Ractive', 'ractiveObjectObserve', 'app/app'], function($, Ra
     var config = window.bootstrap_config;
     $('#bootstrap-config').empty();
 
-    app.start({config: config});
+    app.start({config: config, sections: {
+      "main": "#main",
+      "overlay": "#overlay",
+      "menu": "#menu",
+      "app": "#app"
+    }});
 
   });
 

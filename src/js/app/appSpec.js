@@ -1,44 +1,55 @@
 define(function(require) {
 
-  var App = require('app/app');
-  var sinon = require('sinon');
+  var Squire = require('squire');
   var $ = require('jquery');
+  var expect = require('chai').expect
+  var sinon = require('sinon');
+
+  var testContext = {};
+  testContext.injector = new Squire();
+  testContext.injector.mock('jenkins/wsJenkins', {createConnection: sinon.spy()});
+  var app;
+  var options = {config: {jenkinsWebSocket: {href: ""}}, sections: {"main": $("<div>")}};
 
   describe('app', function () {
-    var app;
+    beforeEach(function(done) {
+      testContext.injector.require(['app/app'], function(App) {
+        testContext.App = App;
+        done();
+      });
+    });
 
     it('has section markup', function() {
       var $element = $('<div>');
-      app = new App({el: $element});
+      app = new testContext.App({el: $element});
 
-      expect(app.el).toContain('#app');
-      expect(app.el).toContain('#menu');
-      expect(app.el).toContain('#main');
-      expect(app.el).toContain('#overlay');
+      expect(app.el.innerHTML).to.have.string('id="app"');
+      expect(app.el.innerHTML).to.have.string('id="menu"');
+      expect(app.el.innerHTML).to.have.string('id="main"');
+      expect(app.el.innerHTML).to.have.string('id="overlay"');
     });
 
     describe('start', function () {
 
       beforeEach(function () {
-        app = new App({el: $('<div>')});
+        app = new testContext.App({el: $('<div>')});
       });
 
+      it('should have called createConnection on wsJenkins', testContext.injector.run(['jenkins/wsJenkins'], function(wsJenkins) {
+        app.start(options);
+        expect(wsJenkins.createConnection).to.have.been.calledOnce;
+      }));
+
       it('initialize a router', function () {
-        expect(app.router).toBeUndefined();
-        app.start();
-        expect(app.router).toBeDefined();
+        expect(app.router).to.be.undefined;
+        app.start(options);
+        expect(app.router).to.not.be.undefined;
       });
 
       it('initialize sections', function () {
-        expect(app.sections).toBeUndefined();
-        app.start();
-        expect(app.sections).toBeDefined();
-      });
-
-      it('calls callback if defined', function() {
-        var spy = sinon.spy();
-        app.start(spy);
-        expect(spy).toHaveBeenCalled();
+        expect(app.sections).to.be.undefined;
+        app.start(options);
+        expect(app.sections).to.not.be.undefined;
       });
     });
   });

@@ -4,10 +4,7 @@ define(function(require) {
   var _ = require('underscore');
   var wsJenkins = require('./wsJenkins');
 
-  var data = {
-    jobs: []
-  };
-
+  var Model = require('perspective-core').Model;
 
   var textForStatus = {
     failed: 'Failed',
@@ -43,18 +40,24 @@ define(function(require) {
     });
   };
 
-  return {
+  var Jenkins = Model.extend({
+    defaults: {
+      jobs: []
+    },
     getAll:function() {
       var jenkins = this;
       request.get(config.getConfig().jenkinsUrl + '/jenkins').end(function(error, res){
-        data.jobs = toJobs(res.body);
+        jenkins.attr.jobs = toJobs(res.body);
       });
     },
     listen: function() {
+      var jenkins = this;
       wsJenkins.client().channel("jenkins").on("jobs_changed", function(jobs) {
-        data.jobs = toJobs(jobs.data);
+        jenkins.attr.jobs = toJobs(jobs.data);
       });
-    },
-    data: data
-  }
+    }
+  });
+
+  return new Jenkins();
+
 });

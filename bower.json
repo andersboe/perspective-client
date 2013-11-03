@@ -7,28 +7,26 @@
     "src/libraries"
   ],
   "dependencies": {
-    "ractive": "~0.3.7",
-    "page": "~1.3.7",
-    "superagent": "~0.15.5",
-    "underscore": "~1.4.4",
-    "requirejs": "~2.1.5",
-    "almond": "~0.2.5",
+    "ractive": "latest",
+    "page": "latest",
+    "superagent": "latest",
+    "underscore": "latest",
+    "almond": "latest",
     "rv": "git@github.com:Rich-Harris/require-ractive-plugin.git#2cd78c24ac51cf686976d68a24d2aa23cd8b3bf7",
     "html5sortable": "https://raw.github.com/farhadi/html5sortable/master/jquery.sortable.js",
     "foundation-icons": "latest",
     "perspective-core-web-socket-helper": "git@github.com:perspective/perspective-core-web-socket-helper.git",
     "perspective-core": "git@github.com:perspective/perspective-core.git",
     "font-awesome": "latest",
-    "text": "~2.0.10",
+    "text": "latest",
     "jquery": "latest"
   },
   "devDependencies": {
+    "requirejs": "latest",
     "chai": "latest",
-    "chai-backbone": "latest",
     "sinon-chai":"latest",
     "sinon": "http://sinonjs.org/releases/sinon-1.6.0.js",
-    "jasmine-sinon": "latest",
     "less.js": "latest",
-    "jasmine-jquery": "~1.5.91"
+    "squire": "latest"
   }
 }

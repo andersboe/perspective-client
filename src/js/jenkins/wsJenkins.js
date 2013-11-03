@@ -11,6 +11,6 @@ define(function(require) {
     client: function() {
       return _client;
     }
-  }
+  };
 
 });

@@ -2,18 +2,17 @@ define(function(require) {
   var request = require('request');
   var config = require('config');
 
-  var Tasks = function() {
-    this.list = [];
-  };
+  var Model = require('perspective-core').Model;
 
-  Tasks.prototype = {
+  var Tasks = Model.extend({
     getAll: function() {
       var tasks = this;
       request.get(config.getConfig().tasksUrl + "/tasks", function(res) {
-         tasks.list = res.body;
+        tasks.attr.list = res.body;
       });
     }
-  };
+  });
 
   return new Tasks();
+
 });

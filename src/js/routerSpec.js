@@ -4,6 +4,7 @@ define(function(require) {
   var Router = require('router');
   var Sections = require('section/sections');
   var page = require('page');
+  var expect = require('chai').expect;
 
   var sections = new Sections({
     "main": $("<div>")
@@ -13,14 +14,14 @@ define(function(require) {
     describe('constructor', function() {
       it('sets sections', function() {
         var router = new Router({sections: sections});
-        expect(router.sections).toBeDefined();
+        expect(router.sections).to.not.be.undefined;
 
       });
 
       it('adds page callbacks', function() {
         page.callbacks.length = 0;
-        var router = new Router({sections: sections});
-        expect(page.callbacks.length).toBe(3);
+        new Router({sections: sections});
+        expect(page.callbacks.length).to.equal(4);
       });
     });
   });

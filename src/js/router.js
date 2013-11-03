@@ -20,7 +20,7 @@ define(function(require) {
   };
 
   Router.prototype.index = function() {
-    this.sections.main.show(TasksView, {data: {tasks: tasks}});
+    this.sections.main.show(TasksView, tasks.attr);
     tasks.getAll();
   };
 
@@ -32,9 +32,9 @@ define(function(require) {
 
   };
 
-  Router.prototype.jenkins = function(ctx, next) {
+  Router.prototype.jenkins = function() {
     jenkins.listen();
-    this.sections.main.show(Jenkins, {data: jenkins.data});
+    this.sections.main.show(Jenkins, jenkins.attr);
     jenkins.getAll();
   };
 

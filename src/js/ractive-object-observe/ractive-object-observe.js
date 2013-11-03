@@ -5,7 +5,6 @@ define(function() {
     }
 
     var ObjectObserveWrapper = function (ractive, obj, keypath, prefix) {
-      var wrapper = this;
       this.value = obj;
       this.keypath = keypath;
 
@@ -20,25 +19,25 @@ define(function() {
 
         changes.forEach(function(change) {
           switch (change.type) {
-            case "updated":
-              scheduleKeyPathUpdate(Object.keys(prefix(change.name))[0]);
-              break;
-            case "new":
-            case "splice":
-            case "deleted":
-              var keyPath = Object.keys(prefix(change.name))[0];
+          case "updated":
+            scheduleKeyPathUpdate(Object.keys(prefix(change.name))[0]);
+            break;
+          case "new":
+          case "splice":
+          case "deleted":
+            var keyPath = Object.keys(prefix(change.name))[0];
 
-              // Array deletions (task.list.length = 0) will trigger one change pr. element
-              // in order to only update ractive once, we normalize the keyPath to represent their containing
-              // array instead, e.g.:
-              //    task.list.1 => task.list
-              // This allows us to trigger 1 update instead of N updates
-              keyPath = keyPath.replace(/\.[0-9]+$/, "");
-              scheduleKeyPathUpdate(keyPath);
-              break;
-            default:
-              console.error("Unhandled change event: " + change.type);
-              break;
+            // Array deletions (task.list.length = 0) will trigger one change pr. element
+            // in order to only update ractive once, we normalize the keyPath to represent their containing
+            // array instead, e.g.:
+            //    task.list.1 => task.list
+            // This allows us to trigger 1 update instead of N updates
+            keyPath = keyPath.replace(/\.[0-9]+$/, "");
+            scheduleKeyPathUpdate(keyPath);
+            break;
+          default:
+            console.error("Unhandled change event: " + change.type);
+            break;
           }
         });
 
@@ -60,10 +59,10 @@ define(function() {
         this.value[keypath] = value;
       },
 
-      reset: function ( object ) {
+      reset: function ( ) {
         this.value = {};
       }
-    }
+    };
 
     return {
       filter: function ( object ) {
@@ -75,4 +74,4 @@ define(function() {
         return new ObjectObserveWrapper(ractive, object, keypath, prefix);
       }
     };
-});
+  });
