@@ -13,5 +13,5 @@
   preserveLicenseComments: true,
   logLevel: 0,
   stubModules: ['text', 'rv'],
-  optimize: 'none'
+  optimize: 'uglify2'
 })

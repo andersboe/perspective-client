@@ -36,10 +36,17 @@ var karmaConfig = path.join('config', 'karma.conf.js');
 /*** TARGETS ********/
 
 target.all = function() {
+  target.convert();
   target.check();
   target.jshint();
   target.test();
   target.build();
+};
+
+target.convert = function() {
+  section('Converting Common JS modules');
+  npmBin('r.js', '-convert', 'src/static/libraries/perspective-core', 'src/static/libraries/perspective-core-rjs');
+  npmBin('r.js', '-convert', 'src/static/libraries/perspective-core-web-socket-helper', 'src/static/libraries/perspective-core-web-socket-helper-rjs');
 };
 
 target.jshint = function() {
