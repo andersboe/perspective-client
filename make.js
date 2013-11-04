@@ -36,11 +36,17 @@ var karmaConfig = path.join('config', 'karma.conf.js');
 /*** TARGETS ********/
 
 target.all = function() {
+  target.bower();
   target.convert();
   target.check();
   target.jshint();
   target.test();
   target.build();
+};
+
+target.bower = function() {
+  section('Installing dependencies');
+  bin('bower', 'install');
 };
 
 target.convert = function() {
@@ -157,6 +163,11 @@ var failIfOnlySubsetOfTestsAreRunning = function() {
 
 
 /*** HELPER FUNCTIONS ********/
+
+var bin = function(name) {
+  var res = exec(name + ' ' + _.rest(arguments).join(' '));
+  done(res);
+};
 
 var npmBin = function(name) {
   var bin = path.join('node_modules', '.bin', name);
