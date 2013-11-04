@@ -7,7 +7,7 @@ define(function(require) {
     describe('constructor', function() {
       it('sets selector', function() {
         var section = new Section('main');
-        expect(section.selector).to.not.be.undefined;
+        expect(section.selector).to.not.be.an('undefined');
       });
     });
 
@@ -16,7 +16,7 @@ define(function(require) {
         var section = new Section('main');
         var View = function() {};
         section.show(View);
-        expect(section.currentView).to.not.be.undefined;
+        expect(section.currentView).to.not.be.an('undefined');
       });
 
       it('passes options to view', function() {

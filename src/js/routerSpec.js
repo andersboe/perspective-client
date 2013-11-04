@@ -14,7 +14,7 @@ define(function(require) {
     describe('constructor', function() {
       it('sets sections', function() {
         var router = new Router({sections: sections});
-        expect(router.sections).to.not.be.undefined;
+        expect(router.sections).to.not.be.an('undefined');
 
       });
 

@@ -15,6 +15,7 @@
   "undef": true,
   "unused": true,
   "strict": false,
+  "expr": true,
   "trailing": true,
   "maxparams": 15,
   "maxdepth": 5,

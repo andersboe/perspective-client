@@ -2,7 +2,7 @@ define(function(require) {
 
   var Squire = require('squire');
   var $ = require('jquery');
-  var expect = require('chai').expect
+  var expect = require('chai').expect;
   var sinon = require('sinon');
 
   var testContext = {};
@@ -41,15 +41,15 @@ define(function(require) {
       }));
 
       it('initialize a router', function () {
-        expect(app.router).to.be.undefined;
+        expect(app.router).to.be.an('undefined');
         app.start(options);
-        expect(app.router).to.not.be.undefined;
+        expect(app.router).to.not.be.an('undefined');
       });
 
       it('initialize sections', function () {
-        expect(app.sections).to.be.undefined;
+        expect(app.sections).to.be.an('undefined');
         app.start(options);
-        expect(app.sections).to.not.be.undefined;
+        expect(app.sections).to.not.be.an('undefined');
       });
     });
   });
