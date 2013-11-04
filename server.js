@@ -24,10 +24,17 @@ app.configure(function() {
 
 });
 
-app.configure('development', function(){
-  app.set('views', __dirname + '/views');
-  app.use(express.static(__dirname + '/src'));
+app.configure('production', function() {
   app.use(express.errorHandler());
+  app.set('views', __dirname + '/target/frontend-build/views');
+  app.use(express.static(__dirname + '/target/frontend-build/static'));
+});
+
+app.configure('development', function() {
+  app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
+
+  app.set('views', __dirname + '/src/views');
+  app.use(express.static(__dirname + '/src/static'));
 });
 
 app.all('*', function(request, response) {

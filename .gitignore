@@ -1,4 +1,4 @@
-src/libraries
+src/static/libraries
 node_modules/
 target/
 .idea

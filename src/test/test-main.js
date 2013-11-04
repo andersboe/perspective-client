@@ -6,7 +6,7 @@ var preIncluded = ['chai', 'sinon', 'sinon-chai'];
 var deps = preIncluded.concat(tests);
 
 requirejs.config({
-  baseUrl: '/base/src/js',
+  baseUrl: '/base/src/static/js',
   paths: {
     underscore: '../libraries/underscore/underscore',
     Ractive: '../libraries/ractive/Ractive',
@@ -23,7 +23,7 @@ requirejs.config({
 
 
 
-    testHelper: '/base/test/js/testHelper',
+    testHelper: '/base/src/test/testHelper',
     'chai': '../libraries/chai/chai',
     'sinon': '../libraries/sinon/index',
     'sinon-chai': '../libraries/sinon-chai/lib/sinon-chai',

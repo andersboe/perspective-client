@@ -14,7 +14,7 @@ var moment = require('moment');
 
 var version = process.env.VERSION || moment().format('YYYYMMDD');
 var targetDir = process.env.OUTPUT_DIR || path.join('target', 'frontend-build');
-var appDir = path.join('src');
+var appDir = path.join('src/static');
 
 var indexFile = path.join('config', 'index.mustache');
 var mainLessFile = path.join(appDir, 'css', 'main.less');
@@ -24,9 +24,9 @@ var devRequireFile = path.join('libraries', 'requirejs', 'require.js');
 var devMainLessFile = path.join('css', 'main.less');
 
 var jsFileName = 'app-' + version + '.js';
-var jsFile = path.join(targetDir, jsFileName);
+var jsFile = path.join(targetDir, 'static', jsFileName);
 var cssFileName = 'style-' + version + '.css';
-var cssFile = path.join(targetDir, cssFileName);
+var cssFile = path.join(targetDir, 'static', cssFileName);
 
 var rjsConfig = path.join('config', 'build-config.js');
 var jshintConfig = path.join('config', 'jshint.json');
@@ -61,7 +61,8 @@ target.wtest = function() {
 };
 
 target.build = function() {
-  createCleanDir(targetDir);
+  createCleanDir(path.join(targetDir, 'views'));
+  createCleanDir(path.join(targetDir, 'static'));
 
   buildIndexHtml();
   buildJavaScript();
@@ -81,8 +82,8 @@ target.check = function() {
 /*** APP FUNCTIONS ********/
 
 var buildIndexHtml = function() {
-  var htmlProductionFile = path.join(targetDir, 'index.html');
-  var htmlDevFile = path.join('views', 'index.html');
+  var htmlProductionFile = path.join(targetDir, 'views', 'index.html');
+  var htmlDevFile = path.join('src', 'views', 'index.html');
 
   section('Building HTML for production → ' + htmlProductionFile);
   renderAndWriteTemplate(indexFile, htmlProductionFile, {
