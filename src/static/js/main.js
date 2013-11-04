@@ -9,12 +9,13 @@ require.config({
     jquery: '../libraries/jquery/jquery',
     page: '../libraries/page/index',
     superagent: '../libraries/superagent/superagent',
-    webSocketHelper: '../libraries/perspective-core-web-socket-helper/index',
-    'perspective-core': '../libraries/perspective-core/index',
-    'lib/validation': '../libraries/perspective-core/lib/validation',
-    'lib/model': '../libraries/perspective-core/lib/model'
-  },
 
+
+    webSocketHelper: '../libraries/perspective-core-web-socket-helper-rjs/index',
+    'perspective-core': '../libraries/perspective-core-rjs/index',
+    'lib/validation': '../libraries/perspective-core-rjs/lib/validation',
+    'lib/model': '../libraries/perspective-core-rjs/lib/model'
+  },
   shim: {
     underscore: {
       exports: '_'
@@ -22,6 +23,7 @@ require.config({
     page: {
       exports: 'page'
     },
+
     'perspective-core': {
       deps: ['underscore', 'lib/validation', 'lib/model'],
       exports: 'perspective-core'
