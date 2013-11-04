@@ -1,8 +1,9 @@
 define(function(require) {
 
   var treeParser = require('tree-parser/tree-parser');
+  var expect = require('chai').expect;
 
-  ddescribe('tree-parser', function() {
+  describe('tree-parser', function() {
 
     describe('arrays', function (){
       var items = [
@@ -11,28 +12,28 @@ define(function(require) {
         "project1_feature1",
         "project1_feature1_work",
         "project1_feature2",
-        "project2_feature1",
+        "project2_feature1"
       ];
 
       it('should parse top level', function() {
         var tree = treeParser.parse(items, {
-          separator: "_", 
+          separator: "_",
           assignChildrenToKey: "children",
           assignSeparatedNameToKey: "name"
         });
-        expect(tree.length).toBe(2);
-        expect(tree[0].name).toBe("project1");
-        expect(tree[1].name).toBe("project2");
+        expect(tree.length).to.eql(2);
+        expect(tree[0].name).to.eql("project1");
+        expect(tree[1].name).to.eql("project2");
       });
 
       it('should parse sub levels', function() {
         var tree = treeParser.parse(items, {
-          separator: "_", 
+          separator: "_",
           assignChildrenToKey: "children",
           assignSeparatedNameToKey: "name"
         });
 
-        expect(tree).toEqual([
+        expect(tree).to.eql([
           {
             name: "project1",
             children: [
@@ -54,7 +55,7 @@ define(function(require) {
             ]
           }
         ]);
-      });  
+      });
     });
 
     describe('array with objects', function() {
@@ -69,13 +70,13 @@ define(function(require) {
 
       it('should use supplied separationKey for parsing hiarchy', function() {
         var tree = treeParser.parse(items, {
-          separator: "_", 
+          separator: "_",
           performSeparationOnKey: "name",
-          assignChildrenToKey: "children", 
+          assignChildrenToKey: "children",
           assignSeparatedNameToKey: "partName"
         });
 
-        expect(tree).toEqual([
+        expect(tree).to.eql([
           {
             name: "project1",
             partName: "project1",
@@ -115,7 +116,6 @@ define(function(require) {
         ]);
       });
     });
-    
   });
 
 });

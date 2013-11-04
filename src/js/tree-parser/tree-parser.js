@@ -1,4 +1,4 @@
-define(function(require) {
+define(function() {
 	var tmpKeyPrefix = "__tk_";
 
 	function itemsToTree(items, options) {
@@ -7,7 +7,7 @@ define(function(require) {
 		function addToTree(subtree, parts, item) {
 			var key = parts.shift();
 			var current = subtree[tmpKeyPrefix + key];
-			
+
 			if(!current) {
 				var leaf = {};
 				if(typeof item === "object" && parts.length === 0) {
@@ -34,11 +34,11 @@ define(function(require) {
 	}
 
 	function treeToArray(tree, options) {
-		
+
 		function process(node) {
 			var data = [];
 			Object.keys(node).forEach(function(key) {
-				
+
 				if(key.indexOf(tmpKeyPrefix) === 0) {
 					var obj = node[key];
 
@@ -63,7 +63,7 @@ define(function(require) {
 
 	function removeTmpKeys(obj) {
 		Object.keys(obj).forEach(function(key) {
-			if(key.indexOf(tmpKeyPrefix) === 0) {	
+			if(key.indexOf(tmpKeyPrefix) === 0) {
 				delete obj[key];
 			}
 		});
@@ -77,5 +77,5 @@ define(function(require) {
 			var tree = itemsToTree(items, options);
 			return treeToArray(tree, options);
 		}
-	}
+	};
 });

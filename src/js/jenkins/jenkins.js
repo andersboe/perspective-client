@@ -4,7 +4,6 @@ define(function(require) {
   var _ = require('underscore');
   var wsJenkins = require('./wsJenkins');
   var treeParser = require('tree-parser/tree-parser');
-
   var Model = require('perspective-core').Model;
 
   var textForStatus = {
@@ -34,13 +33,18 @@ define(function(require) {
   };
 
   var toJobs = function(jobs) {
-    var jobs = treeParser.parse(jobs, {
-      separator: "_", 
-      performSeparationOnKey: "name", 
+    var mappedJobs = _.map(jobs, function(job) {
+      job.text = textForStatus[job.status];
+      job.simpleStatus = simpleStatusForStatus[job.status];
+      return job;
+    });
+
+    return treeParser.parse(mappedJobs, {
+      separator: "_",
+      performSeparationOnKey: "name",
       assignChildrenToKey: "jobs",
       assignSeparatedNameToKey: "subname"
     });
-    return jobs;
   };
 
   var Jenkins = Model.extend({
