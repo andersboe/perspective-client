@@ -47,7 +47,6 @@ require(['jquery', 'Ractive', 'ractiveObjectObserve', 'app/app'], function($, Ra
     app.start({config: config, sections: {
       "main": "#main",
       "overlay": "#overlay",
-      "menu": "#menu",
       "app": "#app"
     }});
 

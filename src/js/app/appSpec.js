@@ -24,7 +24,6 @@ define(function(require) {
       app = new testContext.App({el: $element});
 
       expect(app.el.innerHTML).to.have.string('id="app"');
-      expect(app.el.innerHTML).to.have.string('id="menu"');
       expect(app.el.innerHTML).to.have.string('id="main"');
       expect(app.el.innerHTML).to.have.string('id="overlay"');
     });
