@@ -51,7 +51,7 @@ target.test = function() {
   npmBin('karma', 'start', './config/karma.conf.js', '--browsers PhantomJS', '--single-run');
 };
 
-target.testWatch = function() {
+target.wtest = function() {
   section('Running JavaScript tests');
   npmBin('karma', 'start', './config/karma.conf.js', '--browsers PhantomJS', '--auto-watch');
 };
