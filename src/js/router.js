@@ -12,7 +12,7 @@ define(function(require) {
     this.sections = options.sections;
 
     page('/', _.bind(this.index, this));
-    page('/list', _.bind(this.list, this));
+    page('/board', _.bind(this.board, this));
     page('/jenkins', _.bind(this.jenkins, this));
 
     page('/*', _.bind(this.notFound, this));
@@ -24,18 +24,17 @@ define(function(require) {
     tasks.getAll();
   };
 
-  Router.prototype.notFound = function() {
-    this.sections.main.show(NotFound);
-  };
-
-  Router.prototype.list = function() {
-
+  Router.prototype.board = function() {
   };
 
   Router.prototype.jenkins = function() {
     jenkins.listen();
     this.sections.main.show(Jenkins, jenkins.attr);
     jenkins.getAll();
+  };
+
+  Router.prototype.notFound = function() {
+    this.sections.main.show(NotFound);
   };
 
   return Router;
