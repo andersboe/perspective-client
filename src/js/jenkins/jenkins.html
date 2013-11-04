@@ -1,8 +1,22 @@
+{{#jobs.length}}
+<h2>Jobs</h2>
+	{{>item}}
+{{/jobs.length}}
+{{^jobs.length}}
+	<p class="hero-text">No jobs</p>
+{{/jobs.length}}
+
+<!-- {{>item}} -->
+{{#jobs.length}}
 <ul class="jenkins-job-list">
 {{#jobs}}
-    <li class="jenkins-{{status}} jenkins-{{simpleStatus}}">
-        <span class="name">{{name}}</span>
-        <span class="text">{{text}}</span>
-    </li>
+   <li class="jenkins-{{status}} jenkins-{{simpleStatus}}">
+		{{subname}}
+		{{#.jobs.length}}
+		{{>item}}
+		{{/.jobs.length}}
+	</li> 
 {{/jobs}}
 </ul>
+{{/jobs.length}}
+<!-- {{/item}} -->
