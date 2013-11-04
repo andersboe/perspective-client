@@ -19,7 +19,7 @@ requirejs.config({
     'perspective-core': '../libraries/perspective-core/index',
     'lib/validation': '../libraries/perspective-core/lib/validation',
     'lib/model': '../libraries/perspective-core/lib/model',
-    request: '../libraries/superagent/superagent',
+    superagent: '../libraries/superagent/superagent',
 
 
 

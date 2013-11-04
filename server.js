@@ -21,11 +21,12 @@ app.configure(function() {
 
   app.engine('html', cons.mustache);
   app.set('view engine', 'html');
-  app.set('views', __dirname + '/views');
-  app.use(express.static(__dirname + '/src'));
+
 });
 
 app.configure('development', function(){
+  app.set('views', __dirname + '/views');
+  app.use(express.static(__dirname + '/src'));
   app.use(express.errorHandler());
 });
 

@@ -1,5 +1,5 @@
 define(function(require) {
-  var request = require('request');
+  var request = require('superagent');
   var config = require('config');
   var _ = require('underscore');
   var wsJenkins = require('./wsJenkins');

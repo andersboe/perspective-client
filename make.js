@@ -3,30 +3,34 @@
 require('shelljs/make');
 require('colors');
 
-var _ = require('underscore'),
-  fs = require('fs'),
-  glob = require('glob'),
-  path = require('path'),
-  zlib = require('zlib'),
-  handlebars = require('handlebars'),
-  moment = require('moment');
+var _ = require('underscore');
+var fs = require('fs');
+var glob = require('glob');
+var path = require('path');
+var mustache = require('mustache');
+var moment = require('moment');
 
 /*** CONFIG ********/
 
-var version = process.env.VERSION || moment().format('YYYYMMDD'),
-  targetDir = process.env.OUTPUT_DIR || path.join('target', 'frontend-build'),
-  appDir = path.join('src'),
+var version = process.env.VERSION || moment().format('YYYYMMDD');
+var targetDir = process.env.OUTPUT_DIR || path.join('target', 'frontend-build');
+var appDir = path.join('src');
 
-  indexFile = path.join(appDir, 'index.hb'),
-  mainLessFile = path.join(appDir, 'css', 'main.less'),
+var indexFile = path.join('config', 'index.mustache');
+var mainLessFile = path.join(appDir, 'css', 'main.less');
 
-  jsFileName = 'app-' + version + '.js',
-  jsFile = path.join(targetDir, jsFileName),
-  cssFileName = 'style-' + version + '.css',
-  cssFile = path.join(targetDir, cssFileName),
+var devLessFile = path.join('libraries', 'less.js', 'dist', 'less-1.3.3.js');
+var devRequireFile = path.join('libraries', 'requirejs', 'require.js');
+var devMainLessFile = path.join('css', 'main.less');
 
-  rjsConfig = path.join('./config/build-config.js'),
-  jshintConfig = path.join('./config/jshint.json');
+var jsFileName = 'app-' + version + '.js';
+var jsFile = path.join(targetDir, jsFileName);
+var cssFileName = 'style-' + version + '.css';
+var cssFile = path.join(targetDir, cssFileName);
+
+var rjsConfig = path.join('config', 'build-config.js');
+var jshintConfig = path.join('config', 'jshint.json');
+var karmaConfig = path.join('config', 'karma.conf.js');
 
 
 /*** TARGETS ********/
@@ -48,12 +52,12 @@ target.jshint = function() {
 
 target.test = function() {
   section('Running JavaScript tests');
-  npmBin('karma', 'start', './config/karma.conf.js', '--browsers PhantomJS', '--single-run');
+  npmBin('karma', 'start', karmaConfig, '--browsers PhantomJS', '--single-run');
 };
 
 target.wtest = function() {
   section('Running JavaScript tests');
-  npmBin('karma', 'start', './config/karma.conf.js', '--browsers PhantomJS', '--auto-watch');
+  npmBin('karma', 'start', karmaConfig, '--browsers PhantomJS', '--auto-watch');
 };
 
 target.build = function() {
@@ -62,9 +66,6 @@ target.build = function() {
   buildIndexHtml();
   buildJavaScript();
   buildCss();
-
-  gzip(jsFile);
-  gzip(cssFile);
 
   optimizeImages();
 
@@ -80,12 +81,24 @@ target.check = function() {
 /*** APP FUNCTIONS ********/
 
 var buildIndexHtml = function() {
-  var htmlFile = path.join(targetDir, 'index.html');
+  var htmlProductionFile = path.join(targetDir, 'index.html');
+  var htmlDevFile = path.join('views', 'index.html');
 
-  section('Building HTML → ' + htmlFile);
-  renderAndWriteTemplate(indexFile, htmlFile, {
+  section('Building HTML for production → ' + htmlProductionFile);
+  renderAndWriteTemplate(indexFile, htmlProductionFile, {
     cssFile: cssFileName,
-    jsFile: jsFileName
+    jsFile: jsFileName,
+    prod: true,
+    config: '{{{config}}}'
+  });
+
+  section('Building HTML for development → ' + htmlDevFile);
+  renderAndWriteTemplate(indexFile, htmlDevFile, {
+    devMainLessFile: devMainLessFile,
+    devLess: devLessFile,
+    devRequire: devRequireFile,
+    prod: false,
+    config: '{{{config}}}'
   });
 };
 
@@ -97,20 +110,6 @@ var buildJavaScript = function() {
 var buildCss = function() {
   section('Building Less → ' + cssFile);
   npmBin('lessc', mainLessFile, cssFile);
-};
-
-var gzip = function(file) {
-  var gzip = zlib.createGzip();
-  var input = fs.createReadStream(file);
-  var output = fs.createWriteStream(file + '.gz');
-
-  section('Gzipping ' + file);
-  input.pipe(gzip).pipe(output);
-  success();
-};
-
-var addVersions = function() {
-  // add versions to css and html files
 };
 
 var optimizeImages = function() {
@@ -125,7 +124,7 @@ var optimizeImages = function() {
 
 var renderAndWriteTemplate = function(from, to, data) {
   var content = fs.readFileSync(from).toString();
-  var template = handlebars.compile(content);
+  var template = mustache.compile(content);
   var html = template(data);
 
   fs.writeFileSync(to, html);

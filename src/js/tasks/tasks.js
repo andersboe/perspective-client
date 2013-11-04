@@ -1,5 +1,5 @@
 define(function(require) {
-  var request = require('request');
+  var request = require('superagent');
   var config = require('config');
 
   var Model = require('perspective-core').Model;

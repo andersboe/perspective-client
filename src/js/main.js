@@ -8,11 +8,11 @@ require.config({
     rv: '../libraries/rv/rv',
     jquery: '../libraries/jquery/jquery',
     page: '../libraries/page/index',
+    superagent: '../libraries/superagent/superagent',
     webSocketHelper: '../libraries/perspective-core-web-socket-helper/index',
     'perspective-core': '../libraries/perspective-core/index',
     'lib/validation': '../libraries/perspective-core/lib/validation',
-    'lib/model': '../libraries/perspective-core/lib/model',
-    request: '../libraries/superagent/superagent'
+    'lib/model': '../libraries/perspective-core/lib/model'
   },
 
   shim: {
