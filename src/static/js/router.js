@@ -5,8 +5,9 @@ define(function(require) {
   var JenkinsController = require('jenkins/jenkinsController');
   var _ = require('underscore');
   var jenkins = require('jenkins/jenkins');
-  var TasksController = require('tasks/tasksController');
+  var TasksView = require('tasks/tasksView');
   var tasks = require('tasks/tasks');
+  var BoardController = require('board/boardController');
 
   var Router = function(options) {
     this.sections = options.sections;
@@ -20,11 +21,41 @@ define(function(require) {
   };
 
   Router.prototype.index = function() {
-    this.sections.main.show(TasksController, {tasks: tasks});
+    this.sections.main.show(TasksView, {tasks: tasks});
     tasks.getAll();
   };
 
   Router.prototype.board = function() {
+    var columnConfig = [
+      {
+        title: "Backlog",
+        filter: function(task) {
+          return _.isUndefined(task.get('labels'));
+        }
+      },
+      {
+        title: "Todo",
+        newTaskProperties: {
+          labels: [1]
+        },
+        filter: function(task) {
+          return _.contains(task.get('labels'), 1);
+        }
+      },
+      {
+        title: "In progress",
+        newTaskProperties: {
+          labels: [2]
+        },
+        filter: function(task) {
+          return _.contains(task.get('labels'), 2);
+        }
+      }
+
+    ];
+
+    this.sections.main.show(BoardController, {tasks: tasks, columns: columnConfig});
+    tasks.getAll();
   };
 
   Router.prototype.jenkins = function() {

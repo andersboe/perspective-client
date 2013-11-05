@@ -7,8 +7,7 @@ define(function() {
     var ObjectObserveWrapper = function (ractive, obj, keypath, prefix) {
       this.value = obj;
       this.keypath = keypath;
-
-      Object.observe(this.value, function(changes) {
+      this.observeCallback = function(changes) {
         var keyPathsToUpdate = [];
 
         function scheduleKeyPathUpdate(keyPath) {
@@ -44,11 +43,14 @@ define(function() {
         keyPathsToUpdate.forEach(function(kp) {
           ractive.update(kp.keyPath);
         });
-      });
+      };
+
+      Object.observe(this.value, this.observeCallback);
     };
 
     ObjectObserveWrapper.prototype = {
       teardown: function() {
+        Object.unobserve(this.value, this.observeCallback);
       },
 
       get: function () {
@@ -66,11 +68,10 @@ define(function() {
 
     return {
       filter: function ( object ) {
-        return typeof object === "object" && !object._observed;
+        return typeof object === "object";
       },
 
       wrap: function ( ractive, object, keypath, prefix ) {
-        object._observed = true;
         return new ObjectObserveWrapper(ractive, object, keypath, prefix);
       }
     };
