@@ -1,9 +1,19 @@
+.jenkins-job-list ul {
+  margin: 0 0 0 20px;
+}
+
 .jenkins-job-list {
   list-style: none;
   padding: 0;
+  margin: 0;
+
+  .job-info {
+    margin: 10px 0;
+  }
 
   li {
-    padding: 20px 10px;
+    border: #D9D7C5 solid;
+    padding: 10px 10px;
     margin-bottom: 10px;
   }
 
@@ -64,17 +74,12 @@
   }
 
   li.jenkins-building {
-    
+
   }
 
   span.name {
     color: #fff;
-    font-size: 4rem;
-  }
-
-  span.text {
-    display: block;
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
 }
 

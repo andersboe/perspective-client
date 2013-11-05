@@ -10,11 +10,13 @@
 <ul class="jenkins-job-list">
 {{#jobs}}
    <li class="jenkins-{{status}} jenkins-{{simpleStatus}}">
-		{{subname}}
+        <div class=job-info>
+            <span class="name">{{subname}}</span>
+        </div>
 		{{#.jobs.length}}
 		{{>item}}
 		{{/.jobs.length}}
-	</li> 
+	</li>
 {{/jobs}}
 </ul>
 {{/jobs.length}}
