@@ -9,6 +9,11 @@ define(function() {
         this.data.tasks.add({title: e.node.value});
         e.node.value = "";
       }
+    },
+    data: {
+      filterTasks: function(tasks, filter) {
+        return filter ? tasks.filter(filter) : tasks;
+      }
     }
   };
 });

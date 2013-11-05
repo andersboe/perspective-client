@@ -30,7 +30,7 @@ define(function(require) {
       {
         title: "Backlog",
         filter: function(task) {
-          return _.isUndefined(task.get('labels'));
+          return _.isUndefined(task.labels);
         }
       },
       {
@@ -39,7 +39,7 @@ define(function(require) {
           labels: [1]
         },
         filter: function(task) {
-          return _.contains(task.get('labels'), 1);
+          return _.contains(task.labels, 1);
         }
       },
       {
@@ -48,7 +48,7 @@ define(function(require) {
           labels: [2]
         },
         filter: function(task) {
-          return _.contains(task.get('labels'), 2);
+          return _.contains(task.labels, 2);
         }
       }
 

@@ -16,6 +16,12 @@ define(function(require) {
     },
     partials: {
       tasks: tasksPartial
+    },
+    data: {
+      filterTasks: function(arr, filter) {
+        var tasks = arr.filter(filter);
+        return tasks;
+      }
     }
   }, tasksController));
 });
