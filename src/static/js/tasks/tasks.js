@@ -2,6 +2,7 @@ define(function(require) {
   var request = require('superagent');
   var config = require('config');
   var Model = require('perspective-core').Model;
+  var _ = require('underscore');
 
   var Tasks = Model.extend({
     getAll: function() {
@@ -21,12 +22,14 @@ define(function(require) {
       }
     },
 
-    remove: function(index) {
+    remove: function(id) {
       var tasks = this;
-      var task = tasks.attr.list[index];
+      var task = tasks.attr.list.filter(function(task) {
+        return task.id === id;
+      })[0];
 
-      request.del(getTasksUrl() + "/" + task.id).end(function() {
-        tasks.attr.list.splice(index, 1);
+      request.del(getTasksUrl() + "/" + id).end(function() {
+        tasks.attr.list = _.without(tasks.attr.list, task);
       });
     },
 

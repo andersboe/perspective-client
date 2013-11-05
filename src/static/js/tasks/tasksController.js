@@ -1,12 +1,17 @@
-define(function() {
+define(function(require) {
+  var _ = require("underscore");
 
   return {
     task: {
       remove: function(e) {
-        this.data.tasks.remove(e.index.i);
+        this.data.tasks.remove(e.context.id);
       },
       add: function(e) {
-        this.data.tasks.add({title: e.node.value});
+        var task = {
+          title: e.node.value
+        };
+        task = _.defaults(task, e.context.newTaskProperties || {});
+        this.data.tasks.add(task);
         e.node.value = "";
       }
     },
