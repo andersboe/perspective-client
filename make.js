@@ -154,7 +154,7 @@ var renderAndWriteTemplate = function(from, to, data) {
 };
 
 var failIfOnlySubsetOfTestsAreRunning = function() {
-  var specs = glob.sync(path.join('test', '**', '*Spec.js'));
+  var specs = glob.sync(path.join(appDir, 'js', '**', '*Spec.js'));
 
   section('Checking for "ddescribe" and "iit" in tests');
 
