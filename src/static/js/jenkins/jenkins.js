@@ -6,17 +6,17 @@ define(function(require) {
   var treeParser = require('tree-parser/tree-parser');
   var Model = require('perspective-core').Model;
 
-  var textForStatus = {
-    failed: 'Failed',
-    building_failed: 'Building...',
-    unstable: 'Unstable',
-    building_unstable: 'Building...',
-    ok: 'Everything is OK',
-    building_ok: 'Building...',
-    disabled: 'Disabled',
-    building_disabled: 'Building...',
-    not_built: "I'm not built yet",
-    building_not_built: "Yeehaa i'm building my first build..."
+  var stateForStatus = {
+    failed: 'failed',
+    building_failed: 'failed',
+    unstable: 'unstable',
+    building_unstable: 'unstable',
+    ok: 'ok',
+    building_ok: 'ok',
+    disabled: 'disabled',
+    building_disabled: 'disabled',
+    not_built: "not_built",
+    building_not_built: "not_built"
   };
 
   var simpleStatusForStatus = {
@@ -34,7 +34,7 @@ define(function(require) {
 
   var toJobs = function(jobs) {
     var mappedJobs = _.map(jobs, function(job) {
-      job.text = textForStatus[job.status];
+      job.state = stateForStatus[job.status] || 'disabled';
       job.simpleStatus = simpleStatusForStatus[job.status];
       return job;
     });

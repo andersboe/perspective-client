@@ -1,89 +1,55 @@
-.jenkins-job-list ul {
-  margin: 0 0 0 20px;
-}
+@import "../../css/variables.less";
+@fadePercentage: 60%;
 
 .jenkins-job-list {
   list-style: none;
   padding: 0;
   margin: 0;
 
-  .job-info {
-    margin: 10px 0;
+  ul {
+    margin: 10px 0 0 20px;
   }
 
   li {
-    border: #D9D7C5 solid;
     padding: 10px 10px;
     margin-bottom: 10px;
-  }
-
-  li.jenkins-failed {
-    background: #BE4856;
-  }
-
-  li.jenkins-building_failed {
-    background: #BE4856;
-  }
-
-  li.jenkins-unstable {
-    background: #DD9D9D;
-  }
-
-  li.jenkins-building_unstable {
-    background: #DD9D9D;
-  }
-
-  li.jenkins-ok {
-    background: #0AA594;
-  }
-
-  li.jenkins-building_ok {
-    background: #0AA594;
-  }
-
-  li.jenkins-disabled {
-    span.name {
-      color: #000;
-    }
-    background: #D1D3D4;
-  }
-
-  li.jenkins-building_disabled {
-    span.name {
-      color: #000;
-    }
-    background: #D1D3D4;
-  }
-
-  li.jenkins-not_built {
-    span.name {
-      color: #000;
-    }
-    background: #EBECEC;
-  }
-
-  li.jenkins-building_not_built {
-    span.name {
-      color: #000;
-    }
-    background: #EBECEC;
-  }
-
-  li.jenkins-sleeping {
-
-  }
-
-  li.jenkins-building {
-
-  }
-
-  span.name {
+    border-radius: 5px;
     color: #fff;
     font-size: 1.5rem;
+    position: relative;
   }
-}
 
-@-webkit-keyframes pulse {
-  0% {opacity: 1.0}
-  100% {opacity: 0.3}
+  .jenkins-failed {
+    background: fade(@cError, @fadePercentage);
+  }
+
+  .jenkins-unstable {
+    background: fade(@cWarning, @fadePercentage);
+  }
+
+  .jenkins-ok {
+    background: fade(@cSuccess, @fadePercentage);
+  }
+
+  .jenkins-disabled, .jenkins-not_built {
+    color: fade(@cBackgroundText, 50%);
+    background: @cDisabled;
+  }
+
+  .jenkins-disabled {
+    text-decoration: line-through;
+  }
+
+  .jenkins-building {
+    .spinner {
+      display: inline-block;
+    }
+  }
+
+  .spinner {
+    display: none;
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+  }
 }

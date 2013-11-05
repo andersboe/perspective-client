@@ -9,10 +9,8 @@
 {{#jobs.length}}
 <ul class="jenkins-job-list">
 {{#jobs}}
-   <li class="jenkins-{{status}} jenkins-{{simpleStatus}}">
-        <div class=job-info>
-            <span class="name">{{subname}}</span>
-        </div>
+   <li class="jenkins-{{state}} jenkins-{{simpleStatus}}">
+        <span class="name">{{subname}}</span> <i class="fa fa-refresh spinner"></i>
 		{{#.jobs.length}}
 		{{>item}}
 		{{/.jobs.length}}
