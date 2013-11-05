@@ -19,14 +19,16 @@ var appDir = path.join('src/static');
 var indexFile = path.join('config', 'index.mustache');
 var mainLessFile = path.join(appDir, 'css', 'main.less');
 
-var devLessFile = path.join('libraries', 'less.js', 'dist', 'less-1.3.3.js');
+var devLessFile = path.join('libraries', 'less.js', 'dist', 'less-1.5.0.js');
 var devRequireFile = path.join('libraries', 'requirejs', 'require.js');
 var devMainLessFile = path.join('css', 'main.less');
 
+var viewsDir = path.join(targetDir, 'views');
+var staticDir = path.join(targetDir, 'static');
 var jsFileName = 'app-' + version + '.js';
-var jsFile = path.join(targetDir, 'static', jsFileName);
+var jsFile = path.join(staticDir, jsFileName);
 var cssFileName = 'style-' + version + '.css';
-var cssFile = path.join(targetDir, 'static', cssFileName);
+var cssFile = path.join(staticDir, cssFileName);
 
 var rjsConfig = path.join('config', 'build-config.js');
 var jshintConfig = path.join('config', 'jshint.json');
@@ -81,8 +83,9 @@ target.wtest = function() {
 };
 
 target.build = function() {
-  createCleanDir(path.join(targetDir, 'views'));
-  createCleanDir(path.join(targetDir, 'static'));
+  createCleanDir(targetDir);
+
+  mkdir('-p', viewsDir);
 
   buildIndexHtml();
   buildJavaScript();
@@ -102,7 +105,7 @@ target.check = function() {
 /*** APP FUNCTIONS ********/
 
 var buildIndexHtml = function() {
-  var htmlProductionFile = path.join(targetDir, 'views', 'index.html');
+  var htmlProductionFile = path.join(viewsDir, 'index.html');
   var htmlDevFile = path.join('src', 'views', 'index.html');
 
   section('Building HTML for production → ' + htmlProductionFile);
@@ -129,6 +132,16 @@ var buildJavaScript = function() {
 };
 
 var buildCss = function() {
+
+  section('Copying all .css files');
+  var from = path.join(appDir, 'css/*.css');
+  cp('-R', from, staticDir);
+
+  section('Copying all font files');
+  from = path.join(appDir, 'css/fonts/');
+  var to = path.join(staticDir, 'fonts');
+  cp('-R', from, to);
+
   section('Building Less → ' + cssFile);
   npmBin('lessc', mainLessFile, cssFile);
 };
@@ -136,11 +149,15 @@ var buildCss = function() {
 var optimizeImages = function() {
   var pngs = glob.sync(path.join(appDir, 'images', '*.png'));
 
+  if (pngs.length === 0) {
+    return;
+  }
+
   section('Optimizing pngs');
 
   var to = path.join(targetDir, 'images');
 
-  npmBin('optipng-bin', '-strip all', '-dir ' + to, pngs.join(' '))
+  npmBin('optipng', '-strip all', '-dir ' + to, pngs.join(' '))
 };
 
 var renderAndWriteTemplate = function(from, to, data) {
