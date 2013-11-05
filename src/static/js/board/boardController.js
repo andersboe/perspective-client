@@ -19,8 +19,7 @@ define(function(require) {
     },
     data: {
       filterTasks: function(arr, filter) {
-        var tasks = arr.filter(filter);
-        return tasks;
+        return arr.filter(filter);
       }
     }
   }, tasksController));
