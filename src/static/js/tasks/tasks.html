@@ -1,6 +1,8 @@
-<h2>Tasks</h2>
-<ul>
-    {{#tasks.list}}
-    <li>{{title}}</li>
-    {{/tasks.list}}
-</ul>
+<ol class="list">
+    {{#tasks.attr.list:i}}
+    <li><a href="/tasks/{{id}}"><div class="title">{{title}}</div></a><i class="foundicon-remove remove" on-click="removeTask"></i></li>
+    {{/tasks.attr.list}}
+</ol>
+<div class="list-input">
+	<input on-change="addTask" class="new-task-input" placeholder="Add new task...">
+</div>

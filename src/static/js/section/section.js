@@ -7,10 +7,10 @@ define(function(require) {
   };
 
   _.extend(Section.prototype, {
-    show: function(View, data, options) {
+    show: function(View, data) {
       this.close();
 
-      options = _.extend({el: this.selector}, {data: data}, options);
+      var options = _.extend({el: this.selector}, {data: data});
       options.adaptors = ['ObjectObserve'];
       options.modifyArrays = false;
 

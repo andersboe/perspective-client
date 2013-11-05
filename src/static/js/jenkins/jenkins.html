@@ -1,9 +1,9 @@
-{{#jobs.length}}
+{{#jenkins.attr}}
 	{{>item}}
-{{/jobs.length}}
-{{^jobs.length}}
+{{/jenkins.attr}}
+{{^jenkins.attr.jobs.length}}
 	<p class="hero-text">No jobs</p>
-{{/jobs.length}}
+{{/jenkins.attr.jobs.length}}
 
 <!-- {{>item}} -->
 {{#jobs.length}}

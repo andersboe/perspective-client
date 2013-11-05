@@ -2,10 +2,10 @@ define(function(require) {
 
   var page = require('page');
   var NotFound = require('not_found/notFound');
-  var Jenkins = require('jenkins/jenkinsView');
+  var JenkinsController = require('jenkins/jenkinsController');
   var _ = require('underscore');
   var jenkins = require('jenkins/jenkins');
-  var TasksView = require('tasks/tasksView');
+  var TasksController = require('tasks/tasksController');
   var tasks = require('tasks/tasks');
 
   var Router = function(options) {
@@ -20,7 +20,7 @@ define(function(require) {
   };
 
   Router.prototype.index = function() {
-    this.sections.main.show(TasksView, tasks.attr);
+    this.sections.main.show(TasksController, {tasks: tasks});
     tasks.getAll();
   };
 
@@ -29,7 +29,7 @@ define(function(require) {
 
   Router.prototype.jenkins = function() {
     jenkins.listen();
-    this.sections.main.show(Jenkins, jenkins.attr);
+    this.sections.main.show(JenkinsController, {jenkins: jenkins});
     jenkins.getAll();
   };
 
