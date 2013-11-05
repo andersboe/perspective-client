@@ -50,9 +50,16 @@ target.bower = function() {
 };
 
 target.convert = function() {
+  var coreDir = 'src/static/libraries/perspective-core-rjs';
+  var webSocketDir = 'src/static/libraries/perspective-core-web-socket-helper-rjs';
+  if (test('-d', coreDir) && test('-d', webSocketDir)) {
+    return;
+  }
+
   section('Converting Common JS modules');
-  npmBin('r.js', '-convert', 'src/static/libraries/perspective-core', 'src/static/libraries/perspective-core-rjs');
-  npmBin('r.js', '-convert', 'src/static/libraries/perspective-core-web-socket-helper', 'src/static/libraries/perspective-core-web-socket-helper-rjs');
+  npmBin('r.js', '-convert', 'src/static/libraries/perspective-core', coreDir);
+  npmBin('r.js', '-convert', 'src/static/libraries/perspective-core-web-socket-helper', webSocketDir);
+
 };
 
 target.jshint = function() {
