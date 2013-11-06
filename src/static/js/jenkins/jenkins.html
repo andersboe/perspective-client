@@ -1,15 +1,17 @@
+<section class="builds">
 {{#jenkins.attr}}
 	{{>item}}
 {{/jenkins.attr}}
 {{^jenkins.attr.jobs.length}}
 	<p class="hero-text">No jobs</p>
 {{/jenkins.attr.jobs.length}}
+</section>
 
 <!-- {{>item}} -->
 {{#jobs.length}}
-<ul class="jenkins-job-list">
+<ul class="job-list">
 {{#jobs}}
-   <li class="jenkins-{{state}} jenkins-{{simpleStatus}}">
+   <li class="job-{{state}} job-{{simpleStatus}}">
         <span class="name">{{subname}}</span> <i class="fa fa-refresh spinner"></i>
 		{{#.jobs.length}}
 		{{>item}}

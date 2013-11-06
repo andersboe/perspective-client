@@ -1,7 +1,7 @@
 @import "../../css/variables.less";
-@fadePercentage: 60%;
+@fadePercentage: 100%;
 
-.jenkins-job-list {
+.job-list {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -12,44 +12,57 @@
 
   li {
     padding: 10px 10px;
-    margin-bottom: 10px;
     border-radius: 5px;
     color: #fff;
     font-size: 1.5rem;
     position: relative;
   }
 
-  .jenkins-failed {
+  .job-failed {
     background: fade(@cError, @fadePercentage);
   }
 
-  .jenkins-unstable {
+  .job-unstable {
     background: fade(@cWarning, @fadePercentage);
   }
 
-  .jenkins-ok {
+  .job-ok {
     background: fade(@cSuccess, @fadePercentage);
   }
 
-  .jenkins-disabled, .jenkins-not_built {
+  .job-disabled, .job-not_built {
     color: fade(@cBackgroundText, 50%);
     background: @cDisabled;
   }
 
-  .jenkins-disabled {
+  .job-disabled {
     text-decoration: line-through;
   }
 
-  .jenkins-building {
+  .job-building {
     .spinner {
-      display: inline-block;
+      visibility: inherit;
     }
   }
 
   .spinner {
-    display: none;
-    position: absolute;
-    right: 1rem;
-    top: 1rem;
+    visibility: hidden;
+    margin: 0 0.5rem;
+    padding: 0;
   }
+}
+
+.builds > .job-list > li > .job-list > li {
+  display: inline-block;
+  margin-left: 1rem;
+  float: left;
+}
+
+.builds > .job-list > li > .name {
+  float: left;
+}
+
+.builds > .job-list > li {
+  margin-bottom: 10px;
+  overflow: hidden;
 }
