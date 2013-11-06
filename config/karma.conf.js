@@ -6,10 +6,9 @@ module.exports = function(config) {
 
         // list of files / patterns to load in the browser
         files: [
-          { pattern: 'src/static/js/**/*Spec.js', included: false },
+          'src/test/test-main.js',
           { pattern: 'src/static/**/*.js', included: false },
-          { pattern: 'src/static/js/**/*.html', included: false },
-          'src/test/test-main.js'
+          { pattern: 'src/static/js/**/*.html', included: false }
         ],
 
         // list of files to exclude

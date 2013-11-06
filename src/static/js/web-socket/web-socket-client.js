@@ -1,6 +1,6 @@
 define(function(require) {
 
-  var webSocketHelper = require('webSocketHelper');
+  var webSocketHelper = require('web-socket-helper');
 
   var WebSocketClient = function(config) {
     var socket = this.socket = new WebSocket(config.href, config.protocol);

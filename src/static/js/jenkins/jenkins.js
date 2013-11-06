@@ -2,7 +2,7 @@ define(function(require) {
   var request = require('superagent');
   var config = require('config');
   var _ = require('underscore');
-  var wsJenkins = require('./wsJenkins');
+  var wsJenkins = require('./ws-jenkins');
   var treeParser = require('tree-parser/tree-parser');
   var Model = require('perspective-core').Model;
 

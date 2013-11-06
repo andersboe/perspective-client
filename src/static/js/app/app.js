@@ -7,7 +7,7 @@ define(function(require) {
   var Router = require('router');
 
   var config = require('config');
-  var wsJenkins = require('jenkins/wsJenkins');
+  var wsJenkins = require('jenkins/ws-jenkins');
 
   return Ractive.extend({
     template: appTemplate,

@@ -7,7 +7,7 @@ define(function(require) {
 
   var testContext = {};
   testContext.injector = new Squire();
-  testContext.injector.mock('jenkins/wsJenkins', {createConnection: sinon.spy()});
+  testContext.injector.mock('jenkins/ws-jenkins', {createConnection: sinon.spy()});
   var app;
   var options = {config: {jenkinsWebSocket: {href: ""}}, sections: {"main": $("<div>")}};
 
@@ -34,7 +34,7 @@ define(function(require) {
         app = new testContext.App({el: $('<div>')});
       });
 
-      it('should have called createConnection on wsJenkins', testContext.injector.run(['jenkins/wsJenkins'], function(wsJenkins) {
+      it('should have called createConnection on wsJenkins', testContext.injector.run(['jenkins/ws-jenkins'], function(wsJenkins) {
         app.start(options);
         expect(wsJenkins.createConnection).to.have.been.calledOnce;
       }));

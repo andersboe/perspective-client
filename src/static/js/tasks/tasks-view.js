@@ -2,7 +2,7 @@ define(function(require) {
 
   var template = require('rv!./tasks.html');
   var Ractive = require('Ractive');
-  var tasksController = require('./tasksController');
+  var tasksController = require('./tasks-controller');
   var _ = require('underscore');
 
 

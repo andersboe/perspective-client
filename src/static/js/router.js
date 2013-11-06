@@ -1,18 +1,19 @@
 define(function(require) {
 
   var page = require('page');
-  var NotFound = require('not_found/notFound');
-  var JenkinsController = require('jenkins/jenkinsController');
+  var NotFound = require('not-found/not-found');
+  var JenkinsController = require('jenkins/jenkins-controller');
   var _ = require('underscore');
   var jenkins = require('jenkins/jenkins');
-  var TasksView = require('tasks/tasksView');
+  var TasksView = require('tasks/tasks-view');
   var tasks = require('tasks/tasks');
-  var BoardController = require('board/boardController');
+  var BoardController = require('board/board-controller');
 
   var Router = function(options) {
     this.sections = options.sections;
 
     page('/', _.bind(this.index, this));
+    page('/tasks/:taskId', _.bind(this.task, this));
     page('/board', _.bind(this.board, this));
     page('/jenkins', _.bind(this.jenkins, this));
 
@@ -23,6 +24,11 @@ define(function(require) {
   Router.prototype.index = function() {
     this.sections.main.show(TasksView, {tasks: tasks});
     tasks.getAll();
+  };
+
+  Router.prototype.task = function(ctx) {
+    var taskId = ctx.params.taskId;
+    tasks.get(taskId);
   };
 
   Router.prototype.board = function() {

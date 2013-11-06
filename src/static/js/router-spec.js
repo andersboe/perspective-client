@@ -15,13 +15,12 @@ define(function(require) {
       it('sets sections', function() {
         var router = new Router({sections: sections});
         expect(router.sections).to.not.be.an('undefined');
-
       });
 
       it('adds page callbacks', function() {
         page.callbacks.length = 0;
         new Router({sections: sections});
-        expect(page.callbacks.length).to.equal(4);
+        expect(page.callbacks.length).to.equal(5);
       });
     });
   });
