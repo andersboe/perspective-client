@@ -39,11 +39,29 @@ define(function(require) {
       return job;
     });
 
-    return treeParser.parse(mappedJobs, {
+    jobs = treeParser.parse(mappedJobs, {
       separator: "_",
       performSeparationOnKey: "name",
       assignChildrenToKey: "jobs",
       assignSeparatedNameToKey: "subname"
+    });
+
+    // Jobs parsed to tree might not have a actual state
+    // if their parent node isn't a jenkins job. Example jobs:
+    //
+    //    myapp_feature
+    //
+    // Gives the following tree
+    //    myapp
+    //        feature
+    //
+    // However, in jenkins this is still one job and thus we
+    // need to fake a state for "myapp"
+    return jobs.map(function(job) {
+      if(!job.state) {
+        job.state = 'ok';
+      }
+      return job;
     });
   };
 
