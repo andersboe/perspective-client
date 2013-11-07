@@ -40,12 +40,12 @@
   }
 
   .job-building {
-    .spinner {
+    .spinner-hammer {
       visibility: inherit;
     }
   }
 
-  .spinner {
+  .spinner-hammer {
     visibility: hidden;
     margin: 0 0.5rem;
     padding: 0;
@@ -65,4 +65,18 @@
 .builds > .job-list > li {
   margin-bottom: 10px;
   overflow: hidden;
+}
+
+.spinner-hammer {
+  display: inline-block;
+  -webkit-animation-name: spin-hammer;
+  -webkit-animation-duration: 2000ms;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+}
+
+@-webkit-keyframes spin-hammer {
+    0% { -webkit-transform: rotate(40deg); }
+    50% { -webkit-transform: rotate(145deg); }
+    100% { -webkit-transform: rotate(40deg); }
 }
