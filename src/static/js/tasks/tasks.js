@@ -7,7 +7,13 @@ define(function(require) {
   var Tasks = Model.extend({
     getAll: function() {
       var tasks = this;
-      request.get(getTasksUrl(), function(res) {
+      request.get(getTasksUrl()).end(function(res) {
+        if (res.error) {
+          //TODO ned error handling
+          console.log("Get all tasks failed");
+          return;
+        }
+
         tasks.attr.list = res.body;
       });
     },
@@ -20,6 +26,13 @@ define(function(require) {
       } else {
         return null;
       }
+    },
+
+    get: function(id) {
+      request.get(getTasksUrl(id)).end(function(res) {
+         console.log(res.error);
+         console.log(res.body);
+      });
     },
 
     remove: function(id) {
@@ -49,8 +62,14 @@ define(function(require) {
     }
   });
 
-  function getTasksUrl() {
-    return config.getConfig().tasksUrl + "/tasks";
+  function getTasksUrl(id) {
+    var url = config.getConfig().tasksUrl + "/tasks";
+
+    if(id) {
+      url += '/' + id
+    }
+
+    return url;
   }
 
   return new Tasks();
