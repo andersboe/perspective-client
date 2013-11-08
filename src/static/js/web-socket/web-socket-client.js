@@ -3,14 +3,31 @@ define(function(require) {
   var webSocketHelper = require('web-socket-helper');
 
   var WebSocketClient = function(config) {
-    var socket = this.socket = new WebSocket(config.href, config.protocol);
+    var self = this;
 
+    var initConnection = function(config) {
+      var socket = self.socket = new WebSocket(config.href, config.protocol);
+
+      var onCloseCallback = function() {
+        initConnection(config);
+      };
+
+      initEvents(socket, onCloseCallback);
+    };
+
+    initConnection(config);
+  };
+
+  var initEvents = function (socket, onCloseCallback) {
     socket.onopen = function() {
       console.log("WebSocket connection opened");
     };
 
     socket.onclose = function() {
-      console.log("WebSocket connection closed");
+      console.log("WebSocket connection closed - Reconnecting...");
+      setTimeout(function () {
+        onCloseCallback();
+      }, 2000);
     };
 
     socket.onmessage = function(message) {
@@ -19,6 +36,10 @@ define(function(require) {
       if (errors) {
         console.log(errors);
       }
+    };
+
+    socket.onerror = function(error) {
+      console.log('WebSocket error', error);
     };
   };
 
