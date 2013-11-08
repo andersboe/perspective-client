@@ -2,6 +2,7 @@ define(function(require) {
   var request = require('superagent');
   var config = require('config');
   var Model = require('perspective-core').Model;
+  var Task = require('tasks/task');
   var _ = require('underscore');
 
   var Tasks = Model.extend({
@@ -13,7 +14,6 @@ define(function(require) {
           console.log("Get all tasks failed");
           return;
         }
-
         tasks.attr.list = res.body;
       });
     },
@@ -29,10 +29,13 @@ define(function(require) {
     },
 
     get: function(id) {
+    	var task = new Task();
       request.get(getTasksUrl(id)).end(function(res) {
-        console.log(res.error);
-        console.log(res.body);
+      	task.setAttributes(res.body);
       });
+
+
+      return task;
     },
 
     remove: function(id) {
