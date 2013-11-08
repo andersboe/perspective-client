@@ -30,8 +30,8 @@ define(function(require) {
 
     get: function(id) {
       request.get(getTasksUrl(id)).end(function(res) {
-         console.log(res.error);
-         console.log(res.body);
+        console.log(res.error);
+        console.log(res.body);
       });
     },
 
@@ -66,7 +66,7 @@ define(function(require) {
     var url = config.getConfig().tasksUrl + "/tasks";
 
     if(id) {
-      url += '/' + id
+      url += '/' + id;
     }
 
     return url;
