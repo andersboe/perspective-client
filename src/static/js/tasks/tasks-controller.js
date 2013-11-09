@@ -13,6 +13,14 @@ define(function(require) {
         task = _.defaults(task, e.context.newTaskProperties || {});
         this.data.tasks.add(task);
         e.node.value = "";
+      },
+      save: function(e) {
+      	var button = $(e.node);
+    		var title = button.parent().find(".title").text();
+    		if (e.context.task.attr.title !=  title) {
+    			this.data.task.save({title: title});
+    		};
+
       }
     },
     data: {

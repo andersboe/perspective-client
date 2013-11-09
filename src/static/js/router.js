@@ -6,6 +6,7 @@ define(function(require) {
   var _ = require('underscore');
   var jenkins = require('jenkins/jenkins');
   var TasksView = require('tasks/tasks-view');
+  var TaskView = require('tasks/task-view');
   var tasks = require('tasks/tasks');
   var BoardController = require('board/board-controller');
 
@@ -28,7 +29,8 @@ define(function(require) {
 
   Router.prototype.task = function(ctx) {
     var taskId = ctx.params.taskId;
-    tasks.get(taskId);
+    var task = tasks.get(taskId);
+    this.sections.main.show(TaskView, {task: task});
   };
 
   Router.prototype.board = function() {
