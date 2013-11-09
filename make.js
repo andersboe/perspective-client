@@ -12,6 +12,7 @@ var moment = require('moment');
 
 /*** CONFIG ********/
 
+var term = process.env.TERM;
 var version = process.env.VERSION || moment().format('YYYYMMDD');
 var targetDir = process.env.OUTPUT_DIR || path.join('target', 'frontend-build');
 var appDir = path.join('src/static');
@@ -195,7 +196,9 @@ var bin = function(name) {
 
 var npmBin = function(name) {
   var bin = path.join('node_modules', '.bin', name);
-
+  if (term === 'cygwin')
+    bin = bin+'.cmd';
+	
   if (!test('-e', bin)) {
     echo('Binary does not exist: ' + bin);
     exit(1);
