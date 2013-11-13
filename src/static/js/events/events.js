@@ -1,6 +1,7 @@
 define(function(require) {
   var WebSocketClient = require('web-socket/web-socket-client');
   var config = require('config');
+  var desktopNotifications = require('../notifications/desktop');
 
   return {
     listen: function() {
@@ -10,12 +11,10 @@ define(function(require) {
       }
 
       this.wsClient.channel("events").on("event", function(event) {
-        var notification = new window.Notification(event.data.title);
-        notification.onshow = function() {
-          window.setTimeout(function() {
-            notification.close();
-          }, 2000);
-        };
+        desktopNotifications.show({
+          title: event.data.title,
+          body: event.data.details
+        });
       });
     }
   };

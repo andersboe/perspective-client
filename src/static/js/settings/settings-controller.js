@@ -1,7 +1,7 @@
 define(function(require) {
 
   var template = require('rv!./settings.html');
-  var desktopNotifications = require('./desktop-notifications');
+  var desktopNotifications = require('../notifications/desktop');
   var Ractive = require('Ractive');
 
   return Ractive.extend({
