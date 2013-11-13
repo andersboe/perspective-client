@@ -2,7 +2,7 @@ define(function(require) {
   var request = require('superagent');
   var config = require('config');
   var _ = require('underscore');
-  var wsJenkins = require('./ws-jenkins');
+  var WebSocketClient = require('web-socket/web-socket-client');
   var treeParser = require('tree-parser/tree-parser');
   var Model = require('perspective-core').Model;
 
@@ -71,13 +71,22 @@ define(function(require) {
     },
     getAll:function() {
       var jenkins = this;
-      request.get(config.getConfig().jenkinsUrl + '/jenkins').end(function(error, res){
-        jenkins.attr.jobs = toJobs(res.body);
+      request.get(config.get().jenkins.url + '/jenkins').end(function(error, res){
+        if(error) {
+          console.error(error);
+        } else {
+          jenkins.attr.jobs = toJobs(res.body);
+        }
       });
     },
     listen: function() {
       var jenkins = this;
-      wsJenkins.client().channel("jenkins").on("jobs_changed", function(jobs) {
+      if(!this.wsClient) {
+        this.wsClient = new WebSocketClient(config.get().jenkins.wsUrl);
+        this.wsClient.connect();
+      }
+
+      this.wsClient.channel("jenkins").on("jobs_changed", function(jobs) {
         jenkins.attr.jobs = toJobs(jobs.data);
       });
     }

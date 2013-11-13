@@ -2,22 +2,24 @@ define(function(require) {
 
   var Ractive = require('Ractive');
   var appTemplate = require('rv!./app.html');
-
   var Sections = require('section/sections');
   var Router = require('router');
-
   var config = require('config');
-  var wsJenkins = require('jenkins/ws-jenkins');
+  var events = require('events/events');
 
   return Ractive.extend({
     template: appTemplate,
     start: function(options) {
       this.sections = new Sections(options.sections);
 
-      config.setConfig(options.config);
-      wsJenkins.createConnection(config.getConfig().jenkinsWebSocket);
+      if(config.get().events.enabled) {
+        events.listen();
+      }
 
       this.router = new Router({sections: this.sections});
+    },
+    data: {
+      config: config
     }
   });
 

@@ -3,7 +3,10 @@
         <ul class="menu-list">
             <li><a href="/"><i class="fa fa-th-list fa-3x"></i></a></li>
             <li><a href="/board"><i class="fa fa-columns fa-3x"></i></a></li>
+            {{#config.get().jenkins.enabled}}
             <li><a href="/jenkins"><i class="fa fa-code fa-3x"></i></a></li>
+            {{/config.get().jenkins.enabled}}
+            <li><a href="/settings"><i class="fa fa-cog fa-3x"></i></a></li>
         </ul>
     </section>
     <section id="main"></section>

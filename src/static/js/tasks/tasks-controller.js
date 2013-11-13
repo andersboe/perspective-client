@@ -1,5 +1,6 @@
 define(function(require) {
   var _ = require("underscore");
+  var $ = require("jquery");
 
   return {
     task: {
@@ -15,11 +16,11 @@ define(function(require) {
         e.node.value = "";
       },
       save: function(e) {
-      	var button = $(e.node);
-    		var title = button.parent().find(".title").text();
-    		if (e.context.task.attr.title !=  title) {
-    			this.data.task.save({title: title});
-    		};
+        var button = $(e.node);
+        var title = button.parent().find(".title").text();
+        if (e.context.task.attr.title !== title) {
+          this.data.task.save({title: title});
+        }
 
       }
     },

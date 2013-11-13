@@ -1,3 +1,4 @@
+/*jshint maxstatements:999 */
 define(function(require) {
 
   var page = require('page');
@@ -9,6 +10,8 @@ define(function(require) {
   var TaskView = require('tasks/task-view');
   var tasks = require('tasks/tasks');
   var BoardController = require('board/board-controller');
+  var SettingsController = require('settings/settings-controller');
+  var config = require('config');
 
   var Router = function(options) {
     this.sections = options.sections;
@@ -16,7 +19,12 @@ define(function(require) {
     page('/', _.bind(this.index, this));
     page('/tasks/:taskId', _.bind(this.task, this));
     page('/board', _.bind(this.board, this));
-    page('/jenkins', _.bind(this.jenkins, this));
+
+    if(config.get().jenkins.enabled) {
+      page('/jenkins', _.bind(this.jenkins, this));
+    }
+
+    page('/settings', _.bind(this.settings, this));
 
     page('/*', _.bind(this.notFound, this));
     page();
@@ -70,6 +78,10 @@ define(function(require) {
     jenkins.listen();
     this.sections.main.show(JenkinsController, {jenkins: jenkins});
     jenkins.getAll();
+  };
+
+  Router.prototype.settings = function() {
+    this.sections.main.show(SettingsController, {});
   };
 
   Router.prototype.notFound = function() {

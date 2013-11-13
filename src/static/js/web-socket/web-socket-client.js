@@ -2,31 +2,22 @@ define(function(require) {
 
   var webSocketHelper = require('web-socket-helper');
 
-  var WebSocketClient = function(config) {
-    var self = this;
+  function WebSocketClient(url) {
+    this.url = url;
+  }
 
-    var initConnection = function(config) {
-      var socket = self.socket = new WebSocket(config.href, config.protocol);
+  WebSocketClient.prototype.connect = function() {
+    var wsClient = this;
+    var socket = this.socket = new WebSocket(wsClient.url, "perspective-protocol");
 
-      var onCloseCallback = function() {
-        initConnection(config);
-      };
-
-      initEvents(socket, onCloseCallback);
-    };
-
-    initConnection(config);
-  };
-
-  var initEvents = function (socket, onCloseCallback) {
     socket.onopen = function() {
-      console.log("WebSocket connection opened");
+      console.log("WebSocket connected to " + wsClient.url);
     };
 
     socket.onclose = function() {
-      console.log("WebSocket connection closed - Reconnecting...");
-      setTimeout(function () {
-        onCloseCallback();
+      console.log("WebSocket connection closed to " + wsClient.url + " - Reconnecting...");
+      window.setTimeout(function() {
+        wsClient.connect();
       }, 2000);
     };
 
@@ -39,7 +30,7 @@ define(function(require) {
     };
 
     socket.onerror = function(error) {
-      console.log('WebSocket error', error);
+      console.log('WebSocket error against ' + wsClient.url, error);
     };
   };
 

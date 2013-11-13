@@ -10,7 +10,7 @@ define(function(require) {
     template: template,
     init: function() {
       this.on({
-      	save: this.task.save
+        save: this.task.save
       });
     }
   }, tasksController));

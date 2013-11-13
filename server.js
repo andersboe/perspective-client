@@ -7,12 +7,9 @@ var cons = require('consolidate');
 
 var env = process.env;
 var config =  {
-  tasksUrl: env.TASKS_URL || "",
-  jenkinsUrl: env.JENKINS_URL || "",
-  jenkinsWebSocket: {
-    href: env.JENKINS_WS_HREF || "",
-    protocol: env.JENKINS_WS_PROTOCOL || ""
-  },
+  tasks: {url: env.TASKS_URL || ""},
+  jenkins: {url: env.JENKINS_URL || ""},
+  events: {url: env.EVENTS_URL || ""},
   port: env.SERVER_PORT || ""
 };
 

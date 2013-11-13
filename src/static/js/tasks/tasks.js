@@ -29,9 +29,9 @@ define(function(require) {
     },
 
     get: function(id) {
-    	var task = new Task();
+      var task = new Task();
       request.get(getTasksUrl(id)).end(function(res) {
-      	task.setAttributes(res.body);
+        task.setAttributes(res.body);
       });
 
 
@@ -66,7 +66,7 @@ define(function(require) {
   });
 
   function getTasksUrl(id) {
-    var url = config.getConfig().tasksUrl + "/tasks";
+    var url = config.get().tasks.url + "/tasks";
 
     if(id) {
       url += '/' + id;

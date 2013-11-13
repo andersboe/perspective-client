@@ -35,18 +35,18 @@ require.config({
   }
 });
 
-require(['jquery', 'Ractive', 'ractive-object-observe', 'app/app'], function($, Ractive, objectObserve, App) {
+require(['jquery', 'Ractive', 'ractive-object-observe', 'config', 'app/app'], function($, Ractive, objectObserve, config, App) {
   Ractive.adaptors.ObjectObserve = objectObserve;
 
-  var app = new App({
-    el: $('body')
-  });
-
   $(document).ready(function() {
-    var config = window.bootstrap_config;
+    config.set(window.bootstrap_config);
     $('#bootstrap-config').empty();
 
-    app.start({config: config, sections: {
+    var app = new App({
+      el: $('body')
+    });
+
+    app.start({sections: {
       "main": "#main",
       "overlay": "#overlay",
       "app": "#app"
