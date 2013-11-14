@@ -11,10 +11,16 @@ define(function(require) {
       }
 
       this.wsClient.channel("events").on("event", function(event) {
-        desktopNotifications.show({
+        var notification = {
           title: event.data.title,
           body: event.data.details
-        });
+        };
+
+        if(event.data.conversationId) {
+          notification.tag = event.data.conversationId;
+        }
+
+        desktopNotifications.show(notification);
       });
     }
   };
