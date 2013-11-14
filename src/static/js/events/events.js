@@ -11,6 +11,21 @@ define(function(require) {
       }
 
       this.wsClient.channel("events").on("event", function(event) {
+        var filters = config.get().events.filter;
+        var ignoreEvent = false;
+        Object.keys(filters).forEach(function(key) {
+          if(filters[key]) {
+            if(event.data[key].indexOf(filters[key]) === -1) {
+              console.log(key + " filter ignored " + event.data[key]);
+              ignoreEvent = true;
+            }
+          }
+        });
+
+        if(ignoreEvent) {
+          return;
+        }
+
         var notification = {
           title: event.data.title,
           body: event.data.details

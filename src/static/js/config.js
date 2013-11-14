@@ -1,4 +1,5 @@
-define(function() {
+define(function(require) {
+  var _ = require("underscore");
 
   var _config = {
     tasks: {
@@ -27,6 +28,11 @@ define(function() {
           config[key].wsUrl = value.url.replace(/https?:\/\//, "ws://");
         }
       });
+
+      _.defaults(config.events, {filter: {
+        type: null,
+        title: null
+      }});
       _config = config;
     },
     get: function() {
