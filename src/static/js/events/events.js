@@ -2,41 +2,57 @@ define(function(require) {
   var WebSocketClient = require('web-socket/web-socket-client');
   var config = require('config');
   var desktopNotifications = require('../notifications/desktop');
+  var Model = require('perspective-core').Model;
+  var _ = require('underscore');
 
-  return {
+  var Events = Model.extend({
+    getFilters: function() {
+      this.attr.filters = [];
+    },
+    addFilter: function(filter) {
+      if(filter) {
+        this.attr.filters.push(filter);
+      }
+    },
+    updateFilter: function(index, filter) {
+      if(filter) {
+        this.attr.filters[index] = filter;
+      }
+    },
+    removeFilter: function(index) {
+      this.attr.filters.splice(index, 1);
+    },
     listen: function() {
+      var events = this;
       if(!this.wsClient) {
         this.wsClient = new WebSocketClient(config.get().events.wsUrl);
         this.wsClient.connect();
       }
 
       this.wsClient.channel("events").on("event", function(event) {
-        var filters = config.get().events.filter;
-        var ignoreEvent = false;
-        Object.keys(filters).forEach(function(key) {
-          if(filters[key]) {
-            if(event.data[key].indexOf(filters[key]) === -1) {
-              console.log(key + " filter ignored " + event.data[key]);
-              ignoreEvent = true;
-            }
-          }
-        });
+        events._processEvent(event.data);
+      });
+    },
+    _processEvent: function(event) {
+      var defaultOptions = {};
+      if(event.conversationId) {
+        _.defaults(defaultOptions, event.conversationId);
+      }
 
-        if(ignoreEvent) {
-          return;
+      var functions = {
+        pin: function(options) {
+          _.defaults(options, defaultOptions);
+          desktopNotifications.show(options);
         }
+      };
 
-        var notification = {
-          title: event.data.title,
-          body: event.data.details
-        };
-
-        if(event.data.conversationId) {
-          notification.tag = event.data.conversationId;
+      this.attr.filters.forEach(function(filter) {
+        if(filter.condition.fn(event)) {
+          filter.action.fn(event, functions);
         }
-
-        desktopNotifications.show(notification);
       });
     }
-  };
+  });
+
+  return new Events();
 });

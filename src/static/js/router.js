@@ -9,6 +9,7 @@ define(function(require) {
   var TasksView = require('tasks/tasks-view');
   var TaskView = require('tasks/task-view');
   var tasks = require('tasks/tasks');
+  var events = require('events/events');
   var BoardController = require('board/board-controller');
   var SettingsController = require('settings/settings-controller');
   var config = require('config');
@@ -81,7 +82,8 @@ define(function(require) {
   };
 
   Router.prototype.settings = function() {
-    this.sections.main.show(SettingsController, {});
+    this.sections.main.show(SettingsController, {events: events});
+    events.getFilters();
   };
 
   Router.prototype.notFound = function() {

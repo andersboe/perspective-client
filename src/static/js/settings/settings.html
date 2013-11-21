@@ -1,7 +1,43 @@
-<p><label for="event-filter-title">Filter event titles on</label>
-<input type="text" name="title" on-change="updateEventFilter" /></p>
-<p><label for="event-filter-type">Filter event types on</label>
-<input type="text" name="type" on-change="updateEventFilter" /></p>
 <button on-click="setupDesktopNotifications">
 	Setup and test desktop notifications
 </button>
+
+<h2>Event handlers</h2>
+<button type="button" on-click="testFilters">Run all filters against mock event</button>
+<h3>Mock event</h3>
+<form on-submit="testFilters">
+	<textarea name="event" cols="50" rows="5">
+	{
+		"title": "Awesomeness",
+		"details": "We closed 50 tasks in a day!",
+		"type": "build",
+		"time": "2013-11-21T19:04:43"
+	}
+	</textarea>
+</form>
+
+<h3>Manage filters</h3>
+<form on-submit="addHandler">
+	<select on-change="loadExample">
+		<option>--- Preload examples ---</option>
+		{{#filterExamples:i}}
+		<option value="{{i}}">{{description}}</option>
+		{{/filterExamples}}
+	</select>
+	<div>
+		<textarea name="condition" style="width:49%" data-match="{{match}}" placeholder="When expression is true" on-keyup="evaluate"></textarea>
+		<textarea name="action" style="width:49%" placeholder="Then do this"></textarea>
+		<button type="submit">Add</button> <span class="match-result"></span>
+	</div>
+</form>
+{{#events.attr.filters:i}}
+<div>
+	<h3>Filter {{i+1}}</h3>
+	<form on-submit="updateHandler">
+		<textarea name="condition" style="width:49%" placeholder="When expression is true" on-keyup="evaluate">{{condition.text}}</textarea>
+		<textarea name="action" style="width:49%" placeholder="Then do this">{{action.text}}</textarea>
+
+		<button type="submit">Update</button> <button type="button" on-click="deleteHandler">Delete</button> <span class="match-result"></span>
+	</form>
+</div>
+{{/events.attr.filters}}
