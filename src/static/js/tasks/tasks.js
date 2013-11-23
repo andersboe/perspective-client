@@ -62,6 +62,17 @@ define(function(require) {
         .end(function(res) {
           tasks.attr.list.push(res.body);
         });
+    },
+
+    updatePriorityForTask: function(taskId, nextId, previousId) {
+      request.patch(getTasksUrl(taskId))
+        .send({
+          nextId: nextId,
+          previousId: previousId
+        })
+        .end(function() {
+
+        });
     }
   });
 

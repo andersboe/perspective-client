@@ -11,7 +11,16 @@ define(function(require) {
     init: function() {
       this.on({
         removeTask: this.task.remove,
-        addTask: this.task.add
+        addTask: this.task.add,
+        'dragndrop-items': function (event) {
+
+          var draggedId = event.draggedElement.getAttribute('data-id');
+          var nextToId = event.nextElement !== null ? event.nextElement.getAttribute('data-id') : null;
+          var prevToId = event.previousElement !== null ? event.previousElement.getAttribute('data-id') : null;
+
+          event.context.tasks.updatePriorityForTask(draggedId, nextToId, prevToId);
+
+        }
       });
     }
   }, tasksController));

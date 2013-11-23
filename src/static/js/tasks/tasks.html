@@ -1,8 +1,8 @@
 <div class="list-input">
 	<input on-change="addTask" class="new-task-input" placeholder="Add new task...">
 </div>
-<ol class="list">
+<ol class="list" proxy-dragndrop='dragndrop-items'>
     {{#filterTasks(tasks.attr.list,filter):i}}
-    <li><a href="/tasks/{{id}}"><div class="title">{{title}}</div></a><i class="fa fa-times remove" on-click="removeTask"></i></li>
+    <li data-id="{{id}}"><a href="/tasks/{{id}}"><div class="title">{{title}}</div></a><i class="fa fa-times remove" on-click="removeTask"></i></li>
     {{/filterTasks}}
 </ol>
