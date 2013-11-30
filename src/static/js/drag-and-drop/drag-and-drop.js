@@ -6,10 +6,11 @@ define(function() {
     }
   }
 
+  var currentlyDraggingElement = null;
+
   var DragAndDrop = function(options) {
     var callback = options.callback || function() {};
     var node = options.node;
-    var currentlyDraggingElement = null;
 
     var dragDrop = this;
 
@@ -52,6 +53,9 @@ define(function() {
         }
 
         this.classList.remove('sortable-placeholder');
+        this.classList.remove('sortable-dragging');
+
+        //Find out if the element switches parent
 
         var next = dragDrop.findNext(currentlyDraggingElement);
         var prev = dragDrop.findPrevious(currentlyDraggingElement);
@@ -60,14 +64,14 @@ define(function() {
           draggedElement: currentlyDraggingElement,
           nextElement: next,
           previousElement: prev,
-          node: node
+          node: node,
+          originalEvent: e
         });
 
         return false;
       },
       endHandler: function() {
         currentlyDraggingElement = null;
-        this.classList.remove('sortable-dragging');
       }
     };
   };
