@@ -1,6 +1,6 @@
 define(function(require) {
 
-  var NotFound = require('not-found/not-found');
+  var NotFound = require('not-found/not-found-controller');
   var $ = require('jquery');
   var expect = require('chai').expect;
 

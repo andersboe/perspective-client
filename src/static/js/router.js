@@ -2,12 +2,12 @@
 define(function(require) {
 
   var page = require('page');
-  var NotFound = require('not-found/not-found');
+  var NotFoundController = require('not-found/not-found-controller');
   var JenkinsController = require('jenkins/jenkins-controller');
   var _ = require('underscore');
   var jenkins = require('jenkins/jenkins');
-  var TasksView = require('tasks/tasks-view');
-  var TaskView = require('tasks/task-view');
+  var TasksController = require('tasks/tasks-controller');
+  var TaskController = require('tasks/task-controller');
   var tasks = require('tasks/tasks');
   var events = require('events/events');
   var BoardController = require('board/board-controller');
@@ -32,14 +32,14 @@ define(function(require) {
   };
 
   Router.prototype.index = function() {
-    this.sections.main.show(TasksView, {tasks: tasks});
+    this.sections.main.show(TasksController, {tasks: tasks});
     tasks.getAll();
   };
 
   Router.prototype.task = function(ctx) {
     var taskId = ctx.params.taskId;
     var task = tasks.get(taskId);
-    this.sections.main.show(TaskView, {task: task});
+    this.sections.main.show(TaskController, {task: task});
   };
 
   Router.prototype.board = function() {
@@ -87,7 +87,7 @@ define(function(require) {
   };
 
   Router.prototype.notFound = function() {
-    this.sections.main.show(NotFound);
+    this.sections.main.show(NotFoundController);
   };
 
   return Router;

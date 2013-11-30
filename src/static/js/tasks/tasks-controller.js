@@ -1,33 +1,27 @@
 define(function(require) {
-  var _ = require("underscore");
-  var $ = require("jquery");
 
-  return {
-    task: {
-      remove: function(e) {
-        this.data.tasks.remove(e.context.id);
-      },
-      add: function(e) {
-        var task = {
-          title: e.node.value
-        };
-        task = _.defaults(task, e.context.newTaskProperties || {});
-        this.data.tasks.add(task);
-        e.node.value = "";
-      },
-      save: function(e) {
-        var button = $(e.node);
-        var title = button.parent().find(".title").text();
-        if (e.context.task.attr.title !== title) {
-          this.data.task.save({title: title});
+  var template = require('rv!./tasks.html');
+  var Ractive = require('Ractive');
+  var tasksController = require('./tasks-controller-helper');
+  var _ = require('underscore');
+
+
+  return Ractive.extend(_.extend({
+    template: template,
+    init: function() {
+      this.on({
+        removeTask: this.task.remove,
+        addTask: this.task.add,
+        'dragndrop-items': function (event) {
+
+          var draggedId = event.draggedElement.getAttribute('data-id');
+          var nextToId = event.nextElement !== null ? event.nextElement.getAttribute('data-id') : null;
+          var prevToId = event.previousElement !== null ? event.previousElement.getAttribute('data-id') : null;
+
+          event.context.tasks.updatePriorityForTask(draggedId, nextToId, prevToId);
+
         }
-
-      }
-    },
-    data: {
-      filterTasks: function(tasks, filter) {
-        return filter ? tasks.filter(filter) : tasks;
-      }
+      });
     }
-  };
+  }, tasksController));
 });

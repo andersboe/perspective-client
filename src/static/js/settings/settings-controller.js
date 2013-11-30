@@ -52,6 +52,7 @@ define(function(require) {
     }
 
     try {
+      /*jslint evil: true */
       return new Function("event", "util", str);
     } catch(e) {
       return label + " contains invalid JavaScript: " + e;
