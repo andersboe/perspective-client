@@ -21,8 +21,8 @@
   },
   "dependencies": {
     "express": "~3.4.4",
-    "consolidate": "~0.9.1",
-    "mustache": "~0.7.2"
+    "consolidate": "~0.10.0",
+    "mustache": "~0.8.0"
   },
   "devDependencies": {
     "optipng-bin": "~0.3.1",
