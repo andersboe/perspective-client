@@ -163,8 +163,8 @@ var optimizeImages = function() {
 
 var renderAndWriteTemplate = function(from, to, data) {
   var content = fs.readFileSync(from).toString();
-  var template = mustache.compile(content);
-  var html = template(data);
+  mustache.parse(content);
+  var html = mustache.render(content,data);
 
   fs.writeFileSync(to, html);
 
