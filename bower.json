@@ -12,10 +12,10 @@
     "superagent": "~0.15.7",
     "underscore": "~1.5.2",
     "almond": "~0.2.6",
-    "rv": "git@github.com:Rich-Harris/require-ractive-plugin.git#2cd78c24ac51cf686976d68a24d2aa23cd8b3bf7",
+    "rv": "https://github.com/Rich-Harris/require-ractive-plugin.git#2cd78c24ac51cf686976d68a24d2aa23cd8b3bf7",
     "html5sortable": "https://raw.github.com/farhadi/html5sortable/master/jquery.sortable.js",
-    "perspective-core-web-socket-helper": "git@github.com:perspective/perspective-core-web-socket-helper.git",
-    "perspective-core": "git@github.com:perspective/perspective-core.git",
+    "perspective-core-web-socket-helper": "https://github.com/perspective/perspective-core-web-socket-helper.git",
+    "perspective-core": "https://github.com/perspective/perspective-core.git",
     "text": "~2.0.10",
     "jquery": "~2.0.3"
   },
