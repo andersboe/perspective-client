@@ -18,10 +18,11 @@ define(function() {
 
         changes.forEach(function(change) {
           switch (change.type) {
-          case "updated":
+          case "update":
             scheduleKeyPathUpdate(Object.keys(prefix(change.name))[0]);
             break;
           case "new":
+          case "add":
           case "splice":
           case "deleted":
             var keyPath = Object.keys(prefix(change.name))[0];
