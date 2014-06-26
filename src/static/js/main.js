@@ -8,8 +8,6 @@ require.config({
     jquery: '../libraries/jquery/jquery',
     page: '../libraries/page/index',
     superagent: '../libraries/superagent/superagent',
-
-
     'web-socket-helper': '../libraries/perspective-core-web-socket-helper-rjs/index',
     'perspective-core': '../libraries/perspective-core-rjs/index',
     'lib/validation': '../libraries/perspective-core-rjs/lib/validation',
