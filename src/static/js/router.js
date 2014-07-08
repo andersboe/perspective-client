@@ -10,6 +10,7 @@ define(function(require) {
   var TaskController = require('tasks/task-controller');
   var tasks = require('tasks/tasks');
   var events = require('events/events');
+  var statistics = require('statistics/statistics');
   var BoardController = require('board/board-controller');
   var SettingsController = require('settings/settings-controller');
   var StatisticsController = require('statistics/statistics-controller');
@@ -90,6 +91,7 @@ define(function(require) {
   };
 
   Router.prototype.statistics = function() {
+    statistics.listen();
     this.sections.main.show(StatisticsController, {});
   };
 

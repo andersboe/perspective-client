@@ -14,6 +14,7 @@ define(function(require) {
       var statistics = this;
 
       if(!this.wsClient) {
+        console.log("clienturl: ", config.get().statistics.wsUrl);
         this.wsClient = new WebSocketClient(config.get().statistics.wsUrl);
         this.wsClient.connect();
       }
@@ -21,7 +22,7 @@ define(function(require) {
       this.wsClient.channel("statistics").on("jobs_changed", function(number) {
         console.log("data mottat:", number);
         statistics.attr.number = number.data;
-        console.log(number);
+        console.log(number.data);
       });
     }
 

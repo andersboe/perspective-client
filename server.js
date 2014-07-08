@@ -10,7 +10,8 @@ var config =  {
   tasks: {url: env.TASKS_URL || ""},
   jenkins: {url: env.JENKINS_URL || ""},
   events: {url: env.EVENTS_URL || ""},
-  port: env.SERVER_PORT || ""
+  port: env.SERVER_PORT || "",
+  statistics: {url: env.STATISTICS_URL || ""}
 };
 
 app.configure(function() {
