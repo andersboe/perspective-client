@@ -11,6 +11,11 @@ define(function(require) {
       url: null,
       wsUrl: null
     },
+    statistics: {
+      enabled: false,
+      url: null,
+      wsUrl: null
+    },
     events: {
       enabled: false,
       url: null,
