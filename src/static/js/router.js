@@ -12,6 +12,7 @@ define(function(require) {
   var events = require('events/events');
   var BoardController = require('board/board-controller');
   var SettingsController = require('settings/settings-controller');
+  var StatisticsController = require('statistics/statistics-controller');
   var config = require('config');
 
   var Router = function(options) {
@@ -26,6 +27,8 @@ define(function(require) {
     }
 
     page('/settings', _.bind(this.settings, this));
+
+    page('/statistics', _.bind(this.statistics, this));
 
     page('/*', _.bind(this.notFound, this));
     page();
@@ -84,6 +87,10 @@ define(function(require) {
   Router.prototype.settings = function() {
     this.sections.main.show(SettingsController, {events: events});
     events.getFilters();
+  };
+
+  Router.prototype.statistics = function() {
+    this.sections.main.show(StatisticsController, {});
   };
 
   Router.prototype.notFound = function() {
